@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --stone: #2c2c2c;      /* Deep Charcoal */
-            --slate: #5e6063;      /* Mid Grey */
-            --tan: #d4c3a3;        /* Professional Tan/Gold Accent */
-            --beige: #f9f7f2;      /* Off-white/Cream background */
+            --stone: #2c2c2c;
+            --slate: #5e6063;
+            --tan: #d4c3a3;
+            --beige: #f9f7f2;
             --white: #ffffff;
             --border-grey: #e0ddd5;
         }
@@ -27,7 +27,6 @@
 
         h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--stone); }
 
-        /* Navigation */
         nav {
             background: var(--white);
             padding: 1.5rem 10%;
@@ -45,7 +44,6 @@
         .nav-links a { margin-left: 2rem; text-decoration: none; color: var(--slate); font-weight: 400; transition: color 0.3s; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .nav-links a:hover { color: var(--tan); }
 
-        /* Hero Section */
         .hero {
             padding: 120px 10%;
             display: flex;
@@ -55,7 +53,7 @@
         }
 
         .hero-image { flex: 1; max-width: 280px; }
-        .hero-image img { width: 100%; border-radius: 4px; filter: grayscale(10%); box-shadow: 8px 8px 0px var(--tan); object-fit: cover; }
+        .hero-image img { width: 100%; border-radius: 4px; box-shadow: 8px 8px 0px var(--tan); object-fit: cover; }
 
         .hero-text { flex: 1; }
         .hero-text h1 { font-size: 3.8rem; margin-bottom: 0.5rem; line-height: 1.1; }
@@ -64,7 +62,6 @@
 
         .hero-details { margin-bottom: 1.5rem; font-size: 0.95rem; color: var(--slate); line-height: 1.8; }
 
-        /* Content Sections */
         section { padding: 100px 10%; }
         .section-title { text-align: center; margin-bottom: 60px; font-size: 2.2rem; letter-spacing: 1px; }
         .section-title::after { content: ''; display: block; width: 40px; height: 2px; background: var(--tan); margin: 20px auto 0; }
@@ -80,17 +77,41 @@
         .education-box h3 { color: var(--white); margin-bottom: 10px; font-size: 1.8rem; }
         .education-box p { color: var(--tan); font-size: 1.1rem; margin-bottom: 5px; }
 
-        /* Experience Timeline */
-        .experience-item { border-left: 1px solid var(--tan); padding-left: 35px; margin-bottom: 50px; position: relative; }
-        .experience-item::before { content: ''; position: absolute; left: -5px; top: 5px; width: 9px; height: 9px; background: var(--tan); border-radius: 50%; }
+        /* Journey Styling - Condensing the Experience */
+        .journey-container { max-width: 900px; margin: 0 auto; }
+        
+        .journey-item {
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-grey);
+        }
+        
+        .journey-item:last-child { border-bottom: none; }
 
-        .experience-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
-        .experience-header h3 { font-size: 1.3rem; font-weight: 600; }
-        .experience-date { color: var(--slate); font-weight: 500; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+        .journey-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 15px;
+        }
 
-        .experience-item ul { padding-left: 18px; list-style-type: none; }
-        .experience-item li { margin-bottom: 10px; font-size: 0.95rem; color: var(--slate); position: relative; }
-        .experience-item li::before { content: "—"; position: absolute; left: -18px; color: var(--tan); }
+        .journey-header h3 { font-size: 1.5rem; color: var(--stone); }
+        .journey-meta { font-size: 0.85rem; color: var(--tan); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        .journey-text { color: var(--slate); font-size: 1.05rem; text-align: justify; }
+
+        .incoming-badge {
+            display: inline-block;
+            background-color: var(--tan);
+            color: var(--white);
+            padding: 5px 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border-radius: 2px;
+        }
 
         /* Skills Grid */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
@@ -98,17 +119,15 @@
         .skill-card:hover { border-color: var(--tan); transform: translateY(-5px); }
         .skill-card h3 { font-size: 1.1rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; color: var(--tan); }
 
-        /* Footer */
         footer { background: var(--stone); color: var(--white); padding: 80px 10%; text-align: center; }
         .footer-links { margin: 30px 0; }
-        .footer-links a { color: var(--tan); margin: 0 15px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: opacity 0.3s; }
-        .footer-links a:hover { opacity: 0.7; }
+        .footer-links a { color: var(--tan); margin: 0 15px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
         @media (max-width: 992px) {
             .hero { flex-direction: column; text-align: center; padding: 80px 5%; }
             .hero-image { margin-bottom: 40px; }
             .hero-text h1 { font-size: 3rem; }
-            .experience-header { flex-direction: column; gap: 5px; }
+            .journey-header { flex-direction: column; gap: 5px; }
         }
     </style>
 </head>
@@ -119,20 +138,20 @@
         <div class="nav-links">
             <a href="#about">Profile</a>
             <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
+            <a href="#experience">Professional Journey</a>
             <a href="#skills">Skills</a>
         </div>
     </nav>
 
     <header class="hero">
         <div class="hero-image">
-            <img src="ProfilePic.jpeg">
+            <img src="ProfilePic.jpeg" >
         </div>
         <div class="hero-text">
             <span class="tagline">Finance & Accounting</span>
             <h1>Kristin DeMatteo</h1>
             <div class="hero-details">
-                Middletown, New Jersey 07748 | 908-902-3768<br>
+                Middletown, NJ | 908-902-3768<br>
                 kmd382@scarletmail.rutgers.edu<br>
                 <a href="https://www.linkedin.com/in/kristindematteo" style="color: var(--tan); text-decoration: none; font-weight: 600;">LinkedIn Profile</a>
             </div>
@@ -154,7 +173,7 @@
             <p>Bachelor of Science in Finance & Accounting</p>
             <p style="font-size: 0.95rem; opacity: 0.8;">New Brunswick, NJ | Expected May 2027</p>
             <p style="margin-top: 20px; font-style: italic; font-size: 0.9rem; border-top: 1px solid #444; pt: 15px;">
-                Coursework: Financial & Managerial Accounting, Macro & Micro Economics, Calculus I, Statistics, Marketing, Business Management.
+                Specialized Coursework: Financial & Managerial Accounting, Macro & Micro Economics, Calculus I, Statistics, Marketing, and Business Management.
             </p>
         </div>
     </section>
@@ -197,44 +216,21 @@
         </div>
     </section>
 
-        <div class="experience-item">
-            <div class="experience-header">
-                <h3>Banquet Server & Bartender | Proving Ground Waterfront Dining</h3>
-                <span class="experience-date">Feb 2023 – Present | Highlands, NJ</span>
-            </div>
-            <ul>
-                <li>Manages events for 25+ guests, maintaining fine dining etiquette and professional atmosphere.</li>
-                <li>Efficiently crafted cocktail orders from memory and provided expert beverage recommendations to guests.</li>
-            </ul>
-        </div>
-
-        <div class="experience-item">
-            <div class="experience-header">
-                <h3>Senior Food Runner | Proving Ground Waterfront Dining</h3>
-                <span class="experience-date">June 2021 – March 2023 | Highlands, NJ</span>
-            </div>
-            <ul>
-                <li>Multitasked across kitchen operations to successfully complete 100+ orders during peak pressure shifts.</li>
-                <li>Trained new employees in restaurant business practices and safety protocols as a titled Senior team member.</li>
-            </ul>
-        </div>
-    </section>
-
     <section id="skills" style="background-color: var(--white);">
         <h2 class="section-title">Core Competencies</h2>
         <div class="skills-grid">
             <div class="skill-card">
                 <h3>Technical Proficiencies</h3>
-                <p>Microsoft Excel (Advanced), JavaScript, HTML, Adobe Suite, Google Suite, Social Media Management.</p>
+                <p>Advanced Microsoft Excel, JavaScript, HTML, Adobe Creative Cloud, and Google Suite.</p>
             </div>
             <div class="skill-card">
                 <h3>Leadership & Community</h3>
-                <p><strong>Sigma Delta Tau:</strong> Active member involved in philanthropic fundraising for PCAA, SDT Foundation, and RUDM.</p>
+                <p><strong>Sigma Delta Tau:</strong> Active member facilitating philanthropic fundraising for SDT Foundation, PCAA, JWI, and RUTGERS Dance Marathon.</p>
                 <p style="margin-top: 10px;">Women in Business & SCLA Member.</p>
             </div>
             <div class="skill-card">
                 <h3>Personal Interests</h3>
-                <p>Graphic Design, Community Involvement, Soccer, Lacrosse, Skiing, and Running.</p>
+                <p>Graphic Design, Community Involvement, Soccer, Lacrosse, Skiing, Running, and Crafting.</p>
             </div>
         </div>
     </section>
