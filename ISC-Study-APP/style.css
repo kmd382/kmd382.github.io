@@ -1,0 +1,242 @@
+/* --- The Mystical Variables 🧪 --- */
+:root {
+    --bg-color: #1a1a2e;       /* Deep midnight blue */
+    --gold: #f9a826;           /* Treasure gold */
+    --gold-hover: #e69515;     /* Darker gold for hovers */
+    --parchment: #fcfcf3;      /* Clean, readable scroll white */
+    --text-dark: #2b2b2b;      /* Dark gray for readability */
+    --damage-red: #ffcccc;     /* Wrong answer background */
+    --damage-border: #ff4d4d;  /* Wrong answer border */
+    --victory-green: #ccffcc;  /* Correct answer background */
+    --victory-border: #2eb82e; /* Correct answer border */
+}
+
+/* --- Global Reset & Body 🌌 --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* --- The HUD (Heads Up Display) 🛡️ --- */
+.hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: 1px solid var(--gold);
+    margin-bottom: 30px;
+    box-shadow: 0 0 15px rgba(249, 168, 38, 0.1);
+}
+
+.rank-display {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.stats {
+    display: flex;
+    gap: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--gold);
+}
+
+/* --- Main Quest Area 🏰 --- */
+.quest-container {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- Progress Bar 🗺️ --- */
+.progress-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-weight: bold;
+}
+
+progress {
+    width: 100%;
+    height: 12px;
+    border-radius: 10px;
+    appearance: none;
+}
+
+progress::-webkit-progress-bar {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--gold);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--gold);
+}
+
+/* --- The Scroll of Knowledge 📜 --- */
+.scroll-of-knowledge {
+    background-color: var(--parchment);
+    color: var(--text-dark);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+#question-text {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    border-bottom: 2px dashed #ddd;
+    padding-bottom: 20px;
+}
+
+/* --- Magical Buttons 🪄 --- */
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.options-grid button {
+    background-color: white;
+    color: var(--text-dark);
+    border: 2px solid #ccc;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.options-grid button:hover:not(:disabled) {
+    border-color: var(--gold);
+    background-color: #fffaf0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.options-grid button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* --- Feedback Section 👁️ --- */
+#feedback-box {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    border-left: 5px solid var(--gold);
+    animation: fadeIn 0.4s ease-in;
+}
+
+#feedback-title {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+#feedback-explanation {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+#next-btn {
+    background-color: var(--bg-color);
+    color: white;
+    border: 2px solid var(--gold);
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+#next-btn:hover {
+    background-color: var(--gold);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--gold);
+}
+
+/* --- Utilities & Animations ✨ --- */
+.hidden {
+    display: none !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* The Goblin Shake (Damage) 👺⚡ */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+}
+
+.shake-error {
+    animation: shake 0.4s ease-in-out;
+    background-color: var(--damage-red) !important;
+    border-color: var(--damage-border) !important;
+    color: #990000 !important;
+}
+
+/* Victory Glow 🧚‍♂️ */
+.correct-glow {
+    background-color: var(--victory-green) !important;
+    border-color: var(--victory-border) !important;
+    color: #006600 !important;
+}
+
+/* --- Footer ⚒️ --- */
+footer {
+    margin-top: auto; /* Pushes footer to bottom */
+    padding-top: 40px;
+    color: #888;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* --- Mobile Responsiveness 📱 --- */
+@media (max-width: 600px) {
+    .hud {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .scroll-of-knowledge {
+        padding: 25px;
+    }
+    #question-text {
+        font-size: 1.2rem;
+    }
+}

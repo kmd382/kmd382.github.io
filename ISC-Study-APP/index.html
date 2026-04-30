@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISC CPA Quest 🧙‍♂️✨</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <header class="hud">
+        <div class="rank-display">
+            <span id="rank-icon">🧑‍🎓</span> <span id="rank-title">Peasant Bookkeeper</span>
+        </div>
+        <div class="stats">
+            <div class="score">🪙 <span id="score-value">0</span></div>
+            <div class="streak">🐉🔥 <span id="streak-value">0</span> Days</div>
+        </div>
+    </header>
+
+    <main class="quest-container">
+        <div class="progress-bar-container">
+            <label for="quest-progress">Quest Progress 🗺️:</label>
+            <progress id="quest-progress" value="0" max="10"></progress>
+        </div>
+
+        <div class="scroll-of-knowledge">
+            <h2 id="question-text">Summoning your next challenge... 🔮</h2>
+            
+            <div id="options-container" class="options-grid">
+                </div>
+            
+            <div id="feedback-box" class="hidden">
+                <h3 id="feedback-title"></h3>
+                <p id="feedback-explanation"></p>
+                <button id="next-btn">Next Challenge 🐎💨</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Forged by [Your Name] ⚒️ | A quest to conquer the CPA ISC Exam 📜</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

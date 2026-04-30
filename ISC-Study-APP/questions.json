@@ -1,0 +1,239 @@
+{
+  "examMetadata": {
+    "discipline": "ISC",
+    "version": "2026 AICPA Blueprint",
+    "totalQuestionsInBank": 10
+  },
+  "questions": [
+    {
+      "id": "ISC-MCQ-1001",
+      "type": "MCQ",
+      "contentArea": "Area I: Information Systems and Data Management",
+      "topic": "Relational Databases",
+      "skillLevel": "Remembering and Understanding",
+      "timeEstimateMinutes": 1.5,
+      "questionText": "In a relational database architecture, what is the primary purpose of a foreign key?",
+      "options": [
+        "To uniquely identify each record within a single table.",
+        "To establish and enforce a link between data in two different tables.",
+        "To encrypt sensitive data fields from unauthorized database administrators.",
+        "To index the table to speed up data retrieval queries."
+      ],
+      "correctOptionIndex": 1,
+      "explanations": [
+        "Incorrect. Uniquely identifying a record within a single table is the purpose of a Primary Key, not a Foreign Key.",
+        "Correct! A foreign key is a field in one table that uniquely identifies a row of another table, enforcing referential integrity and linking the data.",
+        "Incorrect. Keys in relational databases are used for structuring and linking data, not for encryption or security masking.",
+        "Incorrect. While keys are often indexed automatically by the database engine, the primary purpose of a foreign key is establishing relationships, not speeding up retrieval."
+      ],
+      "blueprintReference": "ISC.I.C.1"
+    },
+    {
+      "id": "ISC-MCQ-1002",
+      "type": "MCQ",
+      "contentArea": "Area I: Information Systems and Data Management",
+      "topic": "Cloud Computing",
+      "skillLevel": "Application",
+      "timeEstimateMinutes": 1.5,
+      "questionText": "An accounting firm wants to develop its own proprietary tax software application but does not want to purchase or manage the underlying operating system, servers, or storage. Which cloud service model should they adopt?",
+      "options": [
+        "Infrastructure as a Service (IaaS)",
+        "Platform as a Service (PaaS)",
+        "Software as a Service (SaaS)",
+        "On-Premises Infrastructure"
+      ],
+      "correctOptionIndex": 1,
+      "explanations": [
+        "Incorrect. With IaaS, the firm would still be responsible for installing and managing the operating systems and middleware.",
+        "Correct! Platform as a Service (PaaS) provides a ready-to-use framework for developers to build applications, while the cloud provider manages the OS, servers, and storage.",
+        "Incorrect. SaaS delivers a fully finished, ready-to-use software application. The firm wants to build their own software, not buy an existing one.",
+        "Incorrect. On-Premises means the firm would have to buy, host, and manage all the hardware and servers themselves."
+      ],
+      "blueprintReference": "ISC.I.A.2"
+    },
+    {
+      "id": "ISC-MCQ-1003",
+      "type": "MCQ",
+      "contentArea": "Area I: Information Systems and Data Management",
+      "topic": "Change Management",
+      "skillLevel": "Analysis",
+      "timeEstimateMinutes": 2.0,
+      "questionText": "Which of the following scenarios represents a critical violation of Segregation of Duties (SoD) within an IT department?",
+      "options": [
+        "A systems analyst writes the code for a new accounting application.",
+        "A database administrator designs the schema for a new relational database.",
+        "A computer programmer approves and migrates their own code changes into the production environment.",
+        "A security administrator assigns user access rights based on approved management requests."
+      ],
+      "correctOptionIndex": 2,
+      "explanations": [
+        "Incorrect. Writing code is a standard responsibility for systems analysts/programmers and does not violate SoD on its own.",
+        "Incorrect. Designing database schemas is the primary job function of a database administrator.",
+        "Correct! A programmer migrating their own code into production is a massive SoD violation, as they could introduce malicious or untested code without oversight.",
+        "Incorrect. A security administrator provisioning access based on management approval represents properly functioning, segregated IT controls."
+      ],
+      "blueprintReference": "ISC.I.D.3"
+    },
+    {
+      "id": "ISC-MCQ-1004",
+      "type": "MCQ",
+      "contentArea": "Area I: Information Systems and Data Management",
+      "topic": "System Development Life Cycle (SDLC)",
+      "skillLevel": "Remembering and Understanding",
+      "timeEstimateMinutes": 1.0,
+      "questionText": "During which phase of the System Development Life Cycle (SDLC) is User Acceptance Testing (UAT) typically performed?",
+      "options": [
+        "Design Phase",
+        "Implementation Phase",
+        "Testing Phase",
+        "Maintenance Phase"
+      ],
+      "correctOptionIndex": 2,
+      "explanations": [
+        "Incorrect. The Design phase focuses on creating the blueprints and architecture for the system, before any testing can occur.",
+        "Incorrect. The Implementation (or development) phase is when the actual coding happens. Testing comes afterward.",
+        "Correct! User Acceptance Testing (UAT) occurs during the Testing phase. End-users verify the system meets their business needs before it is deployed.",
+        "Incorrect. Maintenance occurs after the system has gone live into production."
+      ],
+      "blueprintReference": "ISC.I.D.1"
+    },
+    {
+      "id": "ISC-MCQ-2001",
+      "type": "MCQ",
+      "contentArea": "Area II: Security, Confidentiality, and Privacy",
+      "topic": "Identity and Access Management",
+      "skillLevel": "Application",
+      "timeEstimateMinutes": 1.5,
+      "questionText": "A hospital's electronic health records (EHR) system automatically grants data access permissions based on whether a user's job title is 'Doctor', 'Nurse', or 'Billing Clerk'. Which access control model is this?",
+      "options": [
+        "Discretionary Access Control (DAC)",
+        "Mandatory Access Control (MAC)",
+        "Role-Based Access Control (RBAC)",
+        "Attribute-Based Access Control (ABAC)"
+      ],
+      "correctOptionIndex": 2,
+      "explanations": [
+        "Incorrect. DAC allows the owner of the data to decide who gets access. An automated system based on job titles does not use DAC.",
+        "Incorrect. MAC uses strict security clearance levels (e.g., Top Secret, Confidential) rather than job functions.",
+        "Correct! Role-Based Access Control (RBAC) assigns permissions based on a user's specific role or job title within the organization.",
+        "Incorrect. ABAC uses environmental or context attributes (like time of day or user location), whereas this scenario relies strictly on job titles."
+      ],
+      "blueprintReference": "ISC.II.C.1"
+    },
+    {
+      "id": "ISC-MCQ-2002",
+      "type": "MCQ",
+      "contentArea": "Area II: Security, Confidentiality, and Privacy",
+      "topic": "Cryptography",
+      "skillLevel": "Analysis",
+      "timeEstimateMinutes": 2.0,
+      "questionText": "In a Public Key Infrastructure (PKI) system, if an accountant wants to send an encrypted financial report to an external auditor, which key should the accountant use to encrypt the document to ensure only the auditor can read it?",
+      "options": [
+        "The accountant's public key",
+        "The accountant's private key",
+        "The auditor's public key",
+        "The auditor's private key"
+      ],
+      "correctOptionIndex": 2,
+      "explanations": [
+        "Incorrect. Encrypting with the accountant's public key would mean only the accountant could decrypt it with their private key.",
+        "Incorrect. Encrypting with a private key is used to create a digital signature to prove identity, not to encrypt data for confidentiality.",
+        "Correct! In asymmetric encryption, the sender encrypts the message using the recipient's public key. Then, only the recipient has the private key needed to decrypt it.",
+        "Incorrect. The accountant would never have access to the auditor's private key; private keys must remain completely secret."
+      ],
+      "blueprintReference": "ISC.II.E.2"
+    },
+    {
+      "id": "ISC-MCQ-2003",
+      "type": "MCQ",
+      "contentArea": "Area II: Security, Confidentiality, and Privacy",
+      "topic": "Incident Response",
+      "skillLevel": "Remembering and Understanding",
+      "timeEstimateMinutes": 1.5,
+      "questionText": "According to standard incident response frameworks (like NIST), what is the immediate next step after a cybersecurity breach has been successfully contained?",
+      "options": [
+        "Preparation",
+        "Eradication",
+        "Recovery",
+        "Post-Incident Activity"
+      ],
+      "correctOptionIndex": 1,
+      "explanations": [
+        "Incorrect. Preparation is the very first phase, occurring before an incident ever happens.",
+        "Correct! Once an incident is contained (stopping the spread), the next step is Eradication (removing the malware/threat from the network).",
+        "Incorrect. Recovery comes after Eradication. You cannot safely restore systems (Recovery) until the threat is completely removed.",
+        "Incorrect. Post-Incident Activity (Lessons Learned) is the final step after systems are fully recovered."
+      ],
+      "blueprintReference": "ISC.II.B.3"
+    },
+    {
+      "id": "ISC-MCQ-2004",
+      "type": "MCQ",
+      "contentArea": "Area II: Security, Confidentiality, and Privacy",
+      "topic": "Network Security",
+      "skillLevel": "Remembering and Understanding",
+      "timeEstimateMinutes": 1.5,
+      "questionText": "Which of the following network security devices is specifically designed to monitor traffic for suspicious activity and alert administrators, but does NOT actively block the traffic?",
+      "options": [
+        "Firewall",
+        "Intrusion Detection System (IDS)",
+        "Intrusion Prevention System (IPS)",
+        "Virtual Private Network (VPN)"
+      ],
+      "correctOptionIndex": 1,
+      "explanations": [
+        "Incorrect. A firewall actively blocks or allows traffic based on a predefined set of security rules.",
+        "Correct! An Intrusion Detection System (IDS) is passive. It monitors traffic and sends alerts for suspicious behavior but does not block the traffic.",
+        "Incorrect. An Intrusion Prevention System (IPS) is active; it both monitors traffic and actively blocks threats when detected.",
+        "Incorrect. A VPN creates an encrypted tunnel for secure communication; it is not a monitoring or alerting device."
+      ],
+      "blueprintReference": "ISC.II.D.1"
+    },
+    {
+      "id": "ISC-MCQ-3001",
+      "type": "MCQ",
+      "contentArea": "Area III: Considerations for SOC Engagements",
+      "topic": "Types of SOC Reports",
+      "skillLevel": "Analysis",
+      "timeEstimateMinutes": 2.0,
+      "questionText": "A payroll processing service organization is asked by a client to provide a report covering the operational effectiveness of its security and processing integrity controls over the past 12 months. The report contains sensitive technical details and must be restricted to management and user auditors. Which report is required?",
+      "options": [
+        "SOC 1 Type 2",
+        "SOC 2 Type 2",
+        "SOC 3",
+        "SOC for Cybersecurity"
+      ],
+      "correctOptionIndex": 1,
+      "explanations": [
+        "Incorrect. SOC 1 reports focus on Internal Controls over Financial Reporting (ICFR), not broadly on security and processing integrity.",
+        "Correct! A SOC 2 Type 2 covers Trust Services Criteria (security, processing integrity) over a period of time and is restricted use due to the sensitive control details included.",
+        "Incorrect. While SOC 3 covers Trust Services Criteria, it is a general-use report that does not contain sensitive technical details or a description of the auditor's testing.",
+        "Incorrect. SOC for Cybersecurity is an entity-wide report, not specific to a service organization's system provided to user entities."
+      ],
+      "blueprintReference": "ISC.III.A.1"
+    },
+    {
+      "id": "ISC-MCQ-3002",
+      "type": "MCQ",
+      "contentArea": "Area III: Considerations for SOC Engagements",
+      "topic": "Trust Services Criteria",
+      "skillLevel": "Application",
+      "timeEstimateMinutes": 1.5,
+      "questionText": "Within a SOC 2 engagement, the service organization implements strict data encryption and redaction policies to ensure that client trade secrets are protected from unauthorized disclosure. This primarily addresses which Trust Services Criteria?",
+      "options": [
+        "Security",
+        "Availability",
+        "Processing Integrity",
+        "Confidentiality"
+      ],
+      "correctOptionIndex": 3,
+      "explanations": [
+        "Incorrect. While Security (the common criteria) encompasses protection against unauthorized access generally, protecting specific sensitive data like trade secrets aligns more directly with Confidentiality.",
+        "Incorrect. Availability ensures the system is operational and usable, not that data is kept secret.",
+        "Incorrect. Processing Integrity ensures data is processed completely, accurately, and on time, which is unrelated to redaction or trade secrets.",
+        "Correct! Confidentiality specifically addresses the protection of information designated as restricted or sensitive, such as intellectual property or trade secrets, from unauthorized disclosure."
+      ],
+      "blueprintReference": "ISC.III.B.1"
+    }
+  ]
+}
