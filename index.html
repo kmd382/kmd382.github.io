@@ -7,31 +7,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --navy: #0a2342;
-            --charcoal: #333333;
-            --gold: #c5a059;
+            --stone: #2c2c2c;      /* Deep Charcoal */
+            --slate: #5e6063;      /* Mid Grey */
+            --tan: #d4c3a3;        /* Professional Tan/Gold Accent */
+            --beige: #f9f7f2;      /* Off-white/Cream background */
             --white: #ffffff;
-            --light-grey: #f4f4f4;
+            --border-grey: #e0ddd5;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--charcoal);
-            background-color: var(--white);
+            color: var(--stone);
+            background-color: var(--beige);
             scroll-behavior: smooth;
         }
 
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--navy);
-        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--stone); }
 
         /* Navigation */
         nav {
@@ -43,204 +37,87 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border-grey);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--navy);
-            text-decoration: none;
-        }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--stone); text-decoration: none; letter-spacing: 2px; }
 
-        .nav-links a {
-            margin-left: 2rem;
-            text-decoration: none;
-            color: var(--charcoal);
-            font-weight: 400;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold);
-        }
+        .nav-links a { margin-left: 2rem; text-decoration: none; color: var(--slate); font-weight: 400; transition: color 0.3s; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links a:hover { color: var(--tan); }
 
         /* Hero Section */
         .hero {
-            padding: 100px 10%;
+            padding: 120px 10%;
             display: flex;
             align-items: center;
-            gap: 50px;
-            background: linear-gradient(135deg, #fdfdfd 0%, #ececec 100%);
+            gap: 60px;
+            background-color: var(--white);
         }
 
-        .hero-image {
-            flex: 1;
-            max-width: 400px;
-        }
+        .hero-image { flex: 1; max-width: 380px; }
+        .hero-image img { width: 100%; border-radius: 4px; filter: grayscale(10%); box-shadow: 15px 15px 0px var(--tan); object-fit: cover; }
 
-        .hero-image img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 20px 20px 0px var(--navy);
-            object-fit: cover;
-        }
+        .hero-text { flex: 1; }
+        .hero-text h1 { font-size: 3.8rem; margin-bottom: 0.5rem; line-height: 1.1; }
 
-        .hero-text {
-            flex: 1;
-        }
+        .tagline { font-size: 1rem; color: var(--tan); text-transform: uppercase; letter-spacing: 3px; font-weight: 600; margin-bottom: 1.5rem; display: block; }
 
-        .hero-text h1 {
-            font-size: 3.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .tagline {
-            font-size: 1.1rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-details {
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            color: var(--charcoal);
-        }
+        .hero-details { margin-bottom: 1.5rem; font-size: 0.95rem; color: var(--slate); line-height: 1.8; }
 
         /* Content Sections */
-        section {
-            padding: 80px 10%;
-        }
+        section { padding: 100px 10%; }
+        .section-title { text-align: center; margin-bottom: 60px; font-size: 2.2rem; letter-spacing: 1px; }
+        .section-title::after { content: ''; display: block; width: 40px; height: 2px; background: var(--tan); margin: 20px auto 0; }
 
-        .section-title {
+        .education-box {
+            background: var(--stone);
+            color: var(--white);
+            padding: 50px;
+            border-radius: 2px;
             text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.5rem;
-            position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: var(--gold);
-            margin: 15px auto 0;
-        }
-
-        /* Grid for Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .skill-card {
-            padding: 30px;
-            background: var(--light-grey);
-            border-top: 4px solid var(--navy);
-            transition: 0.3s;
-        }
-
-        .skill-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
+        .education-box h3 { color: var(--white); margin-bottom: 10px; font-size: 1.8rem; }
+        .education-box p { color: var(--tan); font-size: 1.1rem; margin-bottom: 5px; }
 
         /* Experience Timeline */
-        .experience-item {
-            border-left: 2px solid var(--gold);
-            padding-left: 30px;
-            margin-bottom: 40px;
-            position: relative;
-        }
+        .experience-item { border-left: 1px solid var(--tan); padding-left: 35px; margin-bottom: 50px; position: relative; }
+        .experience-item::before { content: ''; position: absolute; left: -5px; top: 5px; width: 9px; height: 9px; background: var(--tan); border-radius: 50%; }
 
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: -9px;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            background: var(--navy);
-            border-radius: 50%;
-        }
+        .experience-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+        .experience-header h3 { font-size: 1.3rem; font-weight: 600; }
+        .experience-date { color: var(--slate); font-weight: 500; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .experience-item h3 {
-            font-size: 1.4rem;
-        }
+        .experience-item ul { padding-left: 18px; list-style-type: none; }
+        .experience-item li { margin-bottom: 10px; font-size: 0.95rem; color: var(--slate); position: relative; }
+        .experience-item li::before { content: "—"; position: absolute; left: -18px; color: var(--tan); }
 
-        .experience-item .location-date {
-            display: flex;
-            justify-content: space-between;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .experience-item ul {
-            padding-left: 20px;
-        }
-
-        .experience-item li {
-            margin-bottom: 8px;
-        }
-
-        /* Education Styling */
-        .education-box {
-            background: var(--navy);
-            color: var(--white);
-            padding: 40px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .education-box h3 {
-            color: var(--white);
-            margin-bottom: 10px;
-        }
-
-        .education-box p {
-            color: #d1d1d1;
-        }
+        /* Skills Grid */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .skill-card { padding: 40px; background: var(--white); border: 1px solid var(--border-grey); border-radius: 2px; transition: all 0.3s ease; }
+        .skill-card:hover { border-color: var(--tan); transform: translateY(-5px); }
+        .skill-card h3 { font-size: 1.1rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; color: var(--tan); }
 
         /* Footer */
-        footer {
-            background: var(--navy);
-            color: var(--white);
-            padding: 60px 10%;
-            text-align: center;
-        }
+        footer { background: var(--stone); color: var(--white); padding: 80px 10%; text-align: center; }
+        .footer-links { margin: 30px 0; }
+        .footer-links a { color: var(--tan); margin: 0 15px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: opacity 0.3s; }
+        .footer-links a:hover { opacity: 0.7; }
 
-        .footer-links {
-            margin-top: 20px;
-        }
-
-        .footer-links a {
-            color: var(--gold);
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; padding: 60px 5%; }
-            .hero-image img { box-shadow: none; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .experience-item .location-date { flex-direction: column; }
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; padding: 80px 5%; }
+            .hero-image { margin-bottom: 40px; }
+            .hero-text h1 { font-size: 3rem; }
+            .experience-header { flex-direction: column; gap: 5px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo">KRISTIN DEMATTEO</a>
+        <a href="#" class="logo">K. DEMATTEO</a>
         <div class="nav-links">
-            <a href="#about">About</a>
+            <a href="#about">Profile</a>
             <a href="#education">Education</a>
             <a href="#experience">Experience</a>
             <a href="#skills">Skills</a>
@@ -249,96 +126,114 @@
 
     <header class="hero">
         <div class="hero-image">
-            <img src="ProfilePic.jpeg">
+            <img src="Assets/ProfilePic.jpeg" alt="Kristin DeMatteo">
         </div>
         <div class="hero-text">
-            <p class="tagline">Finance & Accounting | Rutgers University</p>
+            <span class="tagline">Finance & Accounting</span>
             <h1>Kristin DeMatteo</h1>
             <div class="hero-details">
-                Middletown, NJ | 908-902-3768<br>
-                kmd382@scarletmail.rutgers.edu
+                Middletown, New Jersey 07748 | 908-902-3768<br>
+                kmd382@scarletmail.rutgers.edu<br>
+                <a href="https://www.linkedin.com/in/kristindematteo" style="color: var(--tan); text-decoration: none; font-weight: 600;">LinkedIn Profile</a>
             </div>
-            <p>Aspiring financial professional with a background in data-driven business analysis and a commitment to operational excellence. Proven track record of leadership in community involvement and high-stakes service environments.</p>
+            <p>Junior Finance and Accounting student at Rutgers Business School with experience in data-driven operations and high-volume business environments. Committed to technical precision and strategic growth.</p>
         </div>
     </header>
 
     <section id="about">
-        <h2 class="section-title">Professional Profile</h2>
-        <p style="max-width: 850px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: var(--charcoal);">
-            Currently a dual-degree student at Rutgers Business School[cite: 5, 6]. I leverage strong analytical skills developed through business analysis internships  and community leadership [cite: 31, 33] to solve complex financial problems. My experience ranges from technical data cleaning in Excel [cite: 15] to managing high-volume client transactions and marketing initiatives[cite: 16, 21].
+        <h2 class="section-title">Professional Summary</h2>
+        <p style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: var(--slate);">
+            Driven by a dual focus on accounting integrity and financial analysis. Experienced in cleaning and organizing complex datasets to support evidence-based decision making, and skilled in managing multifaceted business operations under pressure.
         </p>
     </section>
 
-    <section id="education" style="background-color: var(--light-grey);">
-        <h2 class="section-title">Education</h2>
+    <section id="education" style="background-color: var(--white);">
+        <h2 class="section-title">Academic Foundation</h2>
         <div class="education-box">
-            <h3>Rutgers, The State University of New Jersey [cite: 4]</h3>
-            <p><strong>Rutgers Business School [cite: 5]</strong></p>
-            <p>Bachelor of Science in Finance & Accounting  | Expected May 2027 [cite: 8]</p>
-            <p style="margin-top: 15px; font-style: italic; font-size: 0.9rem;">
-                Relevant Coursework: Calculus I, Macro & Micro Economics, Marketing, Statistics, Financial & Managerial Accounting, Financial & Operations & Business Management[cite: 9].
+            <h3>Rutgers Business School</h3>
+            <p>Bachelor of Science in Finance & Accounting</p>
+            <p style="font-size: 0.95rem; opacity: 0.8;">New Brunswick, NJ | Expected May 2027</p>
+            <p style="margin-top: 20px; font-style: italic; font-size: 0.9rem; border-top: 1px solid #444; pt: 15px;">
+                Coursework: Financial & Managerial Accounting, Macro & Micro Economics, Calculus I, Statistics, Marketing, Business Management.
             </p>
         </div>
     </section>
 
     <section id="experience">
-        <h2 class="section-title">Professional Experience</h2>
+        <h2 class="section-title">Experience</h2>
         
         <div class="experience-item">
-            <div class="location-date">
-                <span>New York City, NY [cite: 13]</span>
-                <span>June 2025 [cite: 13]</span>
+            <div class="experience-header">
+                <h3>Business Analyst Intern | SPEAR Physical Therapy</h3>
+                <span class="experience-date">June 2025 | New York City, NY</span>
             </div>
-            <h3>Business Analyst Intern | SPEAR Physical Therapy [cite: 11, 12]</h3>
             <ul>
-                <li>Analyzed 100+ hours of operational and patient data to support evidence-based decision making[cite: 14].</li>
-                <li>Cleaned and organized large datasets from Raintree database using Microsoft Excel (VLOOKUP, Pivot Tables) to identify clinic trends[cite: 15].</li>
-                <li>Collaborated with clinical directors to design data-driven outreach initiatives for NJ clinic expansion[cite: 16].</li>
+                <li>Analyzed 100+ hours of operational and patient data to support evidence-based decision making.</li>
+                <li>Organized large-scale data from Raintree database using Microsoft Excel (VLOOKUP, Pivot Tables) to filter and summarize clinic trends.</li>
+                <li>Collaborated with clinical directors to design data-driven outreach initiatives mapping healthcare providers for clinic expansion in NJ.</li>
             </ul>
         </div>
 
         <div class="experience-item">
-            <div class="location-date">
-                <span>Highlands, NJ [cite: 18]</span>
-                <span>May 2023 – Present [cite: 19]</span>
+            <div class="experience-header">
+                <h3>Server | Proving Ground Waterfront Dining</h3>
+                <span class="experience-date">May 2023 – Present | Highlands, NJ</span>
             </div>
-            <h3>Server / Banquet Bartender | Proving Ground Waterfront Dining [cite: 17, 22]</h3>
             <ul>
-                <li>Provides exceptional customer service in a fast-paced environment managing 5+ tables simultaneously[cite: 20].</li>
-                <li>Executes accurate payment transactions via POS systems[cite: 21].</li>
-                <li>Hosts parties of 25+ people in a fine dining atmosphere while maintaining proper etiquette[cite: 24].</li>
-                <li>Trained employees in standard restaurant business practices as a Senior Food Runner[cite: 29].</li>
+                <li>Delivers high-level service in a fast-paced environment, managing 5+ tables while ensuring effective communication and experience quality.</li>
+                <li>Accurately executes 7+ payment transactions per shift using Point-of-Sale systems.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <h3>Banquet Server & Bartender | Proving Ground Waterfront Dining</h3>
+                <span class="experience-date">Feb 2023 – Present | Highlands, NJ</span>
+            </div>
+            <ul>
+                <li>Manages events for 25+ guests, maintaining fine dining etiquette and professional atmosphere.</li>
+                <li>Efficiently crafted cocktail orders from memory and provided expert beverage recommendations to guests.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <h3>Senior Food Runner | Proving Ground Waterfront Dining</h3>
+                <span class="experience-date">June 2021 – March 2023 | Highlands, NJ</span>
+            </div>
+            <ul>
+                <li>Multitasked across kitchen operations to successfully complete 100+ orders during peak pressure shifts.</li>
+                <li>Trained new employees in restaurant business practices and safety protocols as a titled Senior team member.</li>
             </ul>
         </div>
     </section>
 
-    <section id="skills" style="background-color: var(--light-grey);">
-        <h2 class="section-title">Skills & Involvement</h2>
+    <section id="skills" style="background-color: var(--white);">
+        <h2 class="section-title">Core Competencies</h2>
         <div class="skills-grid">
             <div class="skill-card">
-                <h3>Technical Skills [cite: 36]</h3>
-                <p>Microsoft Office Suite (Advanced Excel), Google Suite, JavaScript, HTML, Adobe Creative Cloud.</p>
+                <h3>Technical Proficiencies</h3>
+                <p>Microsoft Excel (Advanced), JavaScript, HTML, Adobe Suite, Google Suite, Social Media Management.</p>
             </div>
             <div class="skill-card">
-                <h3>Leadership [cite: 30, 31]</h3>
-                <p>Active Member of Sigma Delta Tau (Beta Tau Chapter)[cite: 31]. Raised funds for SDT Foundation, PCAA, JWI, and Rutgers University Dance Marathon[cite: 34].</p>
+                <h3>Leadership & Community</h3>
+                <p><strong>Sigma Delta Tau:</strong> Active member involved in philanthropic fundraising for PCAA, SDT Foundation, and RUDM.</p>
+                <p style="margin-top: 10px;">Women in Business & SCLA Member.</p>
             </div>
             <div class="skill-card">
-                <h3>Interests [cite: 36, 37]</h3>
-                <p>Community Involvement, Graphic Design, Soccer, Lacrosse, Skiing, and Running.</p>
+                <h3>Personal Interests</h3>
+                <p>Graphic Design, Community Involvement, Soccer, Lacrosse, Skiing, and Running.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Kristin DeMatteo | Rutgers Business School</p>
+        <p>&copy; 2026 Kristin DeMatteo</p>
         <div class="footer-links">
-            <a href="https://www.linkedin.com/in/kristindematteo" target="_blank">LinkedIn [cite: 3]</a>
-            <a href="mailto:kmd382@scarletmail.rutgers.edu">Email [cite: 3]</a>
+            <a href="https://www.linkedin.com/in/kristindematteo" target="_blank">LinkedIn</a>
+            <a href="mailto:kmd382@scarletmail.rutgers.edu">Email</a>
         </div>
-        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">
-            Campus Involvement: Women in Business | SCLA [cite: 35]
-        </p>
+        <p style="font-size: 0.75rem; opacity: 0.6; letter-spacing: 1px;">RUTGERS BUSINESS SCHOOL | NEW BRUNSWICK, NJ</p>
     </footer>
 
 </body>
