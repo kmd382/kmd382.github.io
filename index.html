@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
+            /* Portfolio Colors */
             --stone: #2c2c2c;
             --slate: #5e6063;
             --tan: #d4c3a3;
@@ -15,11 +16,13 @@
             --white: #ffffff;
             --border-grey: #e0ddd5;
             
-            /* CPA Quest Variables */
-            --cpa-bg: #1a1a2e;       
-            --cpa-gold: #f9a826;     
-            --cpa-parchment: #fcfcf3;
+            /* Disney CPA Quest Variables ✨🏰 */
+            --cpa-bg-top: #1C2A43;     /* Magic Kingdom Night Sky */
+            --cpa-bg-bottom: #0B1021;  /* Deep Navy */
+            --cpa-gold: #FFD700;       /* Pixie Dust Gold */
+            --cpa-parchment: #ffffff;
             --cpa-text: #2b2b2b;     
+            --cpa-accent: #ffb7c5;     /* Soft princess pink for hovers */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -100,49 +103,50 @@
         .skill-card:hover { border-color: var(--tan); transform: translateY(-5px); }
         .skill-card h3 { font-size: 1.1rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; color: var(--tan); }
 
-        /* --- 🧙‍♂️ CPA QUEST APP STYLES --- */
-        #cpa-quest { background-color: var(--stone); color: var(--white); }
-        #cpa-quest .section-title { color: var(--white); }
+        /* --- ✨ DISNEY CPA QUEST APP STYLES ✨ --- */
+        #cpa-quest { background-color: var(--white); }
+        #cpa-quest .section-title { color: var(--stone); }
         
         .cpa-app-container {
-            background-color: var(--cpa-bg);
+            background: linear-gradient(135deg, var(--cpa-bg-top), var(--cpa-bg-bottom));
             padding: 40px;
-            border-radius: 12px;
+            border-radius: 16px;
             max-width: 700px;
             margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Keep app feel distinct */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 2px solid var(--cpa-gold);
         }
 
-        .cpa-hud { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid var(--cpa-gold); margin-bottom: 30px; }
+        .cpa-hud { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.1); padding: 15px 25px; border-radius: 12px; border: 1px solid var(--cpa-gold); margin-bottom: 30px; backdrop-filter: blur(5px); }
         .cpa-rank-display { font-size: 1.2rem; font-weight: bold; color: white;}
         .cpa-stats { display: flex; gap: 25px; font-size: 1.1rem; font-weight: bold; color: var(--cpa-gold); }
 
-        .cpa-progress-container { display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--cpa-gold); font-weight: bold; margin-bottom: 20px; }
+        .cpa-progress-container { display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--cpa-gold); font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;}
         .cpa-progress-container progress { width: 100%; height: 12px; border-radius: 10px; appearance: none; }
-        .cpa-progress-container progress::-webkit-progress-bar { background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .cpa-progress-container progress::-webkit-progress-value { background-color: var(--cpa-gold); border-radius: 10px; box-shadow: 0 0 10px var(--cpa-gold); }
+        .cpa-progress-container progress::-webkit-progress-bar { background-color: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+        .cpa-progress-container progress::-webkit-progress-value { background-color: var(--cpa-gold); border-radius: 10px; box-shadow: 0 0 15px var(--cpa-gold); }
 
-        .cpa-scroll { background-color: var(--cpa-parchment); color: var(--cpa-text); padding: 30px; border-radius: 12px; }
+        .cpa-scroll { background-color: var(--cpa-parchment); color: var(--cpa-text); padding: 30px; border-radius: 12px; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
         .cpa-scroll h2 { font-size: 1.3rem; line-height: 1.5; margin-bottom: 25px; border-bottom: 2px dashed #ddd; padding-bottom: 20px; color: var(--cpa-text); font-family: 'Segoe UI', sans-serif;}
 
         .cpa-options { display: flex; flex-direction: column; gap: 12px; }
-        .cpa-options button { background-color: white; color: var(--cpa-text); border: 2px solid #ccc; padding: 15px; font-size: 1rem; font-weight: 500; text-align: left; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; }
-        .cpa-options button:hover:not(:disabled) { border-color: var(--cpa-gold); background-color: #fffaf0; transform: translateY(-2px); }
+        .cpa-options button { background-color: white; color: var(--cpa-text); border: 2px solid #e0e0e0; padding: 15px; font-size: 1rem; font-weight: 500; text-align: left; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+        .cpa-options button:hover:not(:disabled) { border-color: var(--cpa-accent); background-color: #fffafa; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 183, 197, 0.3); }
         .cpa-options button:disabled { cursor: not-allowed; opacity: 0.7; }
 
-        .cpa-feedback { margin-top: 25px; padding: 20px; border-radius: 8px; background-color: #f5f5f5; border-left: 5px solid var(--cpa-gold); animation: fadeIn 0.4s ease-in; }
+        .cpa-feedback { margin-top: 25px; padding: 20px; border-radius: 8px; background-color: #fcfcfc; border-left: 5px solid var(--cpa-gold); animation: fadeIn 0.4s ease-in; }
         .cpa-feedback h3 { margin-bottom: 10px; font-size: 1.2rem; font-family: 'Segoe UI', sans-serif;}
         .cpa-feedback p { font-size: 1rem; line-height: 1.5; margin-bottom: 20px; }
         
-        .cpa-next-btn { background-color: var(--cpa-bg); color: white; border: 2px solid var(--cpa-gold); padding: 12px 24px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; transition: 0.3s; text-align: center;}
-        .cpa-next-btn:hover { background-color: var(--cpa-gold); color: var(--cpa-bg); }
+        .cpa-next-btn { background-color: var(--cpa-bg-top); color: white; border: 2px solid var(--cpa-gold); padding: 12px 24px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; transition: 0.3s; text-align: center; text-transform: uppercase; letter-spacing: 1px;}
+        .cpa-next-btn:hover { background-color: var(--cpa-gold); color: var(--cpa-bg-top); box-shadow: 0 0 15px var(--cpa-gold); }
 
         .hidden { display: none !important; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-8px); } 80% { transform: translateX(8px); } }
-        .shake-error { animation: shake 0.4s ease-in-out; background-color: #ffcccc !important; border-color: #ff4d4d !important; color: #990000 !important; }
-        .correct-glow { background-color: #ccffcc !important; border-color: #2eb82e !important; color: #006600 !important; }
+        .shake-error { animation: shake 0.4s ease-in-out; background-color: #ffe6e6 !important; border-color: #ff4d4d !important; color: #cc0000 !important; }
+        .correct-glow { background-color: #f0fff0 !important; border-color: #2eb82e !important; color: #008000 !important; }
 
         footer { background: var(--stone); color: var(--white); padding: 80px 10%; text-align: center; border-top: 1px solid #444;}
         .footer-links { margin: 30px 0; }
@@ -167,7 +171,8 @@
             <a href="#education">Education</a>
             <a href="#experience">Professional Journey</a>
             <a href="#skills">Skills</a>
-            <a href="#cpa-quest">CPA Quest App</a> </div>
+            <a href="#cpa-quest">CPA Quest App</a>
+        </div>
     </nav>
 
     <header class="hero">
@@ -263,30 +268,30 @@
     </section>
 
     <section id="cpa-quest">
-        <h2 class="section-title">Interactive Project: ISC CPA Quest 🧙‍♂️✨</h2>
-        <p style="text-align: center; margin-bottom: 40px; color: #aaa; max-width: 600px; margin-left: auto; margin-right: auto;">
-            I built this gamified study tool using HTML, CSS, and JavaScript to help me prepare for the 2026 AICPA Information Systems and Controls (ISC) Discipline exam. Test your knowledge!
+        <h2 class="section-title">Interactive Project: A Magical CPA Quest ✨🏰</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: var(--slate); max-width: 600px; margin-left: auto; margin-right: auto;">
+            I built this gamified study tool using HTML, CSS, and JavaScript to help me prepare for the 2026 AICPA Information Systems and Controls (ISC) Discipline exam. Test your knowledge with a sprinkle of pixie dust!
         </p>
         
         <div class="cpa-app-container">
             <header class="cpa-hud">
                 <div class="cpa-rank-display">
-                    <span id="rank-icon">🧑‍🎓</span> <span id="rank-title">Peasant Bookkeeper</span>
+                    <span id="rank-icon">🐭</span> <span id="rank-title">Mouseketeer Clerk</span>
                 </div>
                 <div class="cpa-stats">
                     <div class="score">🪙 <span id="score-value">0</span></div>
-                    <div class="streak">🐉🔥 <span id="streak-value">0</span> Days</div>
+                    <div class="streak">✨🏰 <span id="streak-value">0</span> Days</div>
                 </div>
             </header>
         
             <main class="cpa-quest-container">
                 <div class="cpa-progress-container">
-                    <label for="quest-progress">Quest Progress 🗺️:</label>
+                    <label for="quest-progress">Journey to the Castle 🏰:</label>
                     <progress id="quest-progress" value="0" max="10"></progress>
                 </div>
         
                 <div class="cpa-scroll">
-                    <h2 id="question-text">Summoning your next challenge... 🔮</h2>
+                    <h2 id="question-text">The Magic Mirror is thinking... 🪞</h2>
                     
                     <div id="options-container" class="cpa-options">
                         </div>
@@ -294,7 +299,7 @@
                     <div id="feedback-box" class="cpa-feedback hidden">
                         <h3 id="feedback-title"></h3>
                         <p id="feedback-explanation"></p>
-                        <button id="next-btn" class="cpa-next-btn">Next Challenge 🐎💨</button>
+                        <button id="next-btn" class="cpa-next-btn">Next Magical Challenge ✨</button>
                     </div>
                 </div>
             </main>
@@ -311,7 +316,6 @@
     </footer>
 
     <script>
-        // Embed the JSON directly so the portfolio works instantly without a server!
         const rawQuestionsData = [
             {
                 "questionText": "In a relational database architecture, what is the primary purpose of a foreign key?",
@@ -475,13 +479,11 @@
             }
         ];
 
-        // --- State Variables ---
         let currentQuestionIndex = 0;
         let score = parseInt(localStorage.getItem('iscQuestScore')) || 0;
         let streak = parseInt(localStorage.getItem('iscQuestStreak')) || 0;
         let activeQuestions = [];
 
-        // --- DOM Elements ---
         const rankIcon = document.getElementById('rank-icon');
         const rankTitle = document.getElementById('rank-title');
         const scoreValue = document.getElementById('score-value');
@@ -494,18 +496,14 @@
         const feedbackExplanation = document.getElementById('feedback-explanation');
         const nextBtn = document.getElementById('next-btn');
 
-        // --- Initialization Spell ---
         function startQuest() {
             updateStreak();
             updateRankAndScore();
-            
-            // Shuffle the questions!
             activeQuestions = [...rawQuestionsData].sort(() => Math.random() - 0.5); 
             questProgress.max = activeQuestions.length;
             renderQuestion();
         }
 
-        // --- Tracking the Dragon Fire ---
         function updateStreak() {
             const today = new Date().toDateString();
             const lastPlayed = localStorage.getItem('iscLastPlayed');
@@ -527,25 +525,23 @@
             streakValue.innerText = streak;
         }
 
-        // --- The Leveling System ---
         function updateRankAndScore() {
             scoreValue.innerText = score;
             localStorage.setItem('iscQuestScore', score);
 
             if (score < 50) {
-                rankIcon.innerText = "🧑‍🎓"; rankTitle.innerText = "Peasant Bookkeeper";
+                rankIcon.innerText = "🐭"; rankTitle.innerText = "Mouseketeer Clerk";
             } else if (score < 150) {
-                rankIcon.innerText = "🧙‍♂️"; rankTitle.innerText = "Apprentice of the Ledger";
+                rankIcon.innerText = "🦆"; rankTitle.innerText = "Scrooge McDuck's Apprentice";
             } else if (score < 300) {
-                rankIcon.innerText = "🛡️"; rankTitle.innerText = "Knight of Compliance";
+                rankIcon.innerText = "🧞‍♂️"; rankTitle.innerText = "Genie of the Ledger";
             } else if (score < 500) {
-                rankIcon.innerText = "🦅"; rankTitle.innerText = "Lord of the SOC Reports";
+                rankIcon.innerText = "🧚‍♀️"; rankTitle.innerText = "Fairy Godmother of Audits";
             } else {
-                rankIcon.innerText = "🐉✨"; rankTitle.innerText = "Grand Audit Wizard";
+                rankIcon.innerText = "👑"; rankTitle.innerText = "Disney CPA Royalty";
             }
         }
 
-        // --- Render the Challenge ---
         function renderQuestion() {
             feedbackBox.classList.add('hidden');
             optionsContainer.innerHTML = ''; 
@@ -562,28 +558,28 @@
             });
         }
 
-        // --- Evaluate the Spell ---
         function checkAnswer(selectedIndex, clickedButton, currentQ) {
             const allButtons = optionsContainer.querySelectorAll('button');
             allButtons.forEach(btn => btn.disabled = true);
 
             if (selectedIndex === currentQ.correctOptionIndex) {
                 clickedButton.classList.add('correct-glow');
-                feedbackTitle.innerText = "Correct! ✨🧚‍♂️";
+                feedbackTitle.innerText = "Bibbidi-Bobbidi-Boo! Correct! ✨";
                 feedbackTitle.style.color = "green";
                 
                 score += 10;
                 updateRankAndScore();
 
+                // Magical Disney Confetti Colors (Gold, Light Blue, Pink)
                 confetti({
-                    particleCount: 100,
-                    spread: 70,
+                    particleCount: 120,
+                    spread: 80,
                     origin: { y: 0.6 },
-                    colors: ['#f9a826', '#ccffcc', '#ffffff'] 
+                    colors: ['#FFD700', '#87CEFA', '#FFB6C1', '#ffffff'] 
                 });
             } else {
                 clickedButton.classList.add('shake-error');
-                feedbackTitle.innerText = "Incorrect! 👺⚡";
+                feedbackTitle.innerText = "Oh boy... Incorrect! 🍎";
                 feedbackTitle.style.color = "red";
                 allButtons[currentQ.correctOptionIndex].classList.add('correct-glow');
             }
@@ -592,28 +588,27 @@
             feedbackBox.classList.remove('hidden');
         }
 
-        // --- Move to Next Challenge ---
         nextBtn.onclick = () => {
             currentQuestionIndex++;
             if (currentQuestionIndex < activeQuestions.length) {
                 renderQuestion();
             } else {
                 questProgress.value = activeQuestions.length;
-                questionText.innerText = "🎉 Quest Complete! The scroll has been mastered.";
+                questionText.innerText = "🎆 Happily Ever After! You've mastered the Magic Mirror's questions.";
                 optionsContainer.innerHTML = '';
                 feedbackBox.classList.add('hidden');
                 
+                // Big Castle Fireworks Confetti
                 const duration = 3 * 1000;
                 const end = Date.now() + duration;
                 (function frame() {
-                    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#f9a826'] });
-                    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#f9a826'] });
+                    confetti({ particleCount: 8, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#FFD700', '#87CEFA'] });
+                    confetti({ particleCount: 8, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#FFD700', '#FFB6C1'] });
                     if (Date.now() < end) requestAnimationFrame(frame);
                 }());
             }
         };
 
-        // Initialize on load
         window.addEventListener('DOMContentLoaded', startQuest);
     </script>
 </body>
