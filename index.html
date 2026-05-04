@@ -129,11 +129,14 @@
 
         .cpa-scroll { background-color: var(--cpa-parchment); color: var(--cpa-text); padding: 30px; border-radius: 12px; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
         .cpa-scroll h2 { font-size: 1.3rem; line-height: 1.5; margin-bottom: 25px; border-bottom: 2px dashed #ddd; padding-bottom: 20px; color: var(--cpa-text); font-family: 'Segoe UI', sans-serif;}
+        .cpa-scroll.text-center h2 { text-align: center; border-bottom: none; margin-bottom: 10px; padding-bottom: 0; }
+        .cpa-scroll p.subtitle { text-align: center; margin-bottom: 25px; color: var(--slate); }
 
         .cpa-options { display: flex; flex-direction: column; gap: 12px; }
         .cpa-options button { background-color: white; color: var(--cpa-text); border: 2px solid #e0e0e0; padding: 15px; font-size: 1rem; font-weight: 500; text-align: left; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; }
         .cpa-options button:hover:not(:disabled) { border-color: var(--cpa-accent); background-color: #fffafa; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 183, 197, 0.3); }
         .cpa-options button:disabled { cursor: not-allowed; opacity: 0.7; }
+        .cpa-options.menu-grid button { text-align: center; font-size: 1.1rem; font-weight: 600; padding: 20px; border-color: var(--cpa-gold); }
 
         .cpa-feedback { margin-top: 25px; padding: 20px; border-radius: 8px; background-color: #fcfcfc; border-left: 5px solid var(--cpa-gold); animation: fadeIn 0.4s ease-in; }
         .cpa-feedback h3 { margin-bottom: 10px; font-size: 1.2rem; font-family: 'Segoe UI', sans-serif;}
@@ -248,29 +251,10 @@
         </div>
     </section>
 
-    <section id="skills" style="background-color: var(--white);">
-        <h2 class="section-title">Core Competencies</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <h3>Technical Proficiencies</h3>
-                <p>Advanced Microsoft Excel, JavaScript, HTML, Adobe Creative Cloud, and Google Suite.</p>
-            </div>
-            <div class="skill-card">
-                <h3>Leadership & Community</h3>
-                <p><strong>Sigma Delta Tau:</strong> Active member facilitating philanthropic fundraising for SDT Foundation, PCAA, JWI, and RUTGERS Dance Marathon.</p>
-                <p style="margin-top: 10px;">Women in Business & SCLA Member.</p>
-            </div>
-            <div class="skill-card">
-                <h3>Personal Interests</h3>
-                <p>Graphic Design, Community Involvement, Soccer, Lacrosse, Skiing, Running, and Crafting.</p>
-            </div>
-        </div>
-    </section>
-
     <section id="cpa-quest">
         <h2 class="section-title">Interactive Project: A Magical CPA Quest ✨🏰</h2>
         <p style="text-align: center; margin-bottom: 40px; color: var(--slate); max-width: 600px; margin-left: auto; margin-right: auto;">
-            I built this gamified study tool using HTML, CSS, and JavaScript to help me prepare for the 2026 AICPA Information Systems and Controls (ISC) Discipline exam. Test your knowledge with a sprinkle of pixie dust!
+            I built this gamified study tool using HTML, CSS, and JavaScript to test core accounting knowledge. Choose your magical path through FAR, AUD, REG, or BAR!
         </p>
         
         <div class="cpa-app-container">
@@ -285,21 +269,34 @@
             </header>
         
             <main class="cpa-quest-container">
-                <div class="cpa-progress-container">
-                    <label for="quest-progress">Journey to the Castle 🏰:</label>
-                    <progress id="quest-progress" value="0" max="10"></progress>
+                <div id="menu-screen" class="cpa-scroll text-center">
+                    <h2>The Magic Mirror Awaits 🪞</h2>
+                    <p class="subtitle">Which discipline shall we test today?</p>
+                    <div class="cpa-options menu-grid">
+                        <button onclick="startSection('FAR')">🏰 FAR (Financial Accounting)</button>
+                        <button onclick="startSection('AUD')">🧚‍♀️ AUD (Auditing & Attestation)</button>
+                        <button onclick="startSection('REG')">📜 REG (Regulation)</button>
+                        <button onclick="startSection('BAR')">📊 BAR (Business Analysis)</button>
+                    </div>
                 </div>
-        
-                <div class="cpa-scroll">
-                    <h2 id="question-text">The Magic Mirror is thinking... 🪞</h2>
-                    
-                    <div id="options-container" class="cpa-options">
+
+                <div id="quiz-screen" class="hidden">
+                    <div class="cpa-progress-container">
+                        <label id="progress-label" for="quest-progress">Journey to the Castle 🏰:</label>
+                        <progress id="quest-progress" value="0" max="10"></progress>
+                    </div>
+            
+                    <div class="cpa-scroll">
+                        <h2 id="question-text">The Magic Mirror is thinking... 🪞</h2>
+                        
+                        <div id="options-container" class="cpa-options">
+                            </div>
+                        
+                        <div id="feedback-box" class="cpa-feedback hidden">
+                            <h3 id="feedback-title"></h3>
+                            <p id="feedback-explanation"></p>
+                            <button id="next-btn" class="cpa-next-btn">Next Magical Challenge ✨</button>
                         </div>
-                    
-                    <div id="feedback-box" class="cpa-feedback hidden">
-                        <h3 id="feedback-title"></h3>
-                        <p id="feedback-explanation"></p>
-                        <button id="next-btn" class="cpa-next-btn">Next Magical Challenge ✨</button>
                     </div>
                 </div>
             </main>
@@ -316,169 +313,268 @@
     </footer>
 
     <script>
-        const rawQuestionsData = [
-            {
-                "questionText": "In a relational database architecture, what is the primary purpose of a foreign key?",
-                "options": [
-                    "To uniquely identify each record within a single table.",
-                    "To establish and enforce a link between data in two different tables.",
-                    "To encrypt sensitive data fields from unauthorized database administrators.",
-                    "To index the table to speed up data retrieval queries."
-                ],
-                "correctOptionIndex": 1,
-                "explanations": [
-                    "Incorrect. Uniquely identifying a record within a single table is the purpose of a Primary Key, not a Foreign Key.",
-                    "Correct! A foreign key is a field in one table that uniquely identifies a row of another table, enforcing referential integrity and linking the data.",
-                    "Incorrect. Keys in relational databases are used for structuring and linking data, not for encryption or security masking.",
-                    "Incorrect. While keys are often indexed automatically by the database engine, the primary purpose of a foreign key is establishing relationships, not speeding up retrieval."
-                ]
-            },
-            {
-                "questionText": "An accounting firm wants to develop its own proprietary tax software application but does not want to purchase or manage the underlying operating system, servers, or storage. Which cloud service model should they adopt?",
-                "options": [
-                    "Infrastructure as a Service (IaaS)",
-                    "Platform as a Service (PaaS)",
-                    "Software as a Service (SaaS)",
-                    "On-Premises Infrastructure"
-                ],
-                "correctOptionIndex": 1,
-                "explanations": [
-                    "Incorrect. With IaaS, the firm would still be responsible for installing and managing the operating systems and middleware.",
-                    "Correct! Platform as a Service (PaaS) provides a ready-to-use framework for developers to build applications, while the cloud provider manages the OS, servers, and storage.",
-                    "Incorrect. SaaS delivers a fully finished, ready-to-use software application. The firm wants to build their own software.",
-                    "Incorrect. On-Premises means the firm would have to buy, host, and manage all the hardware and servers themselves."
-                ]
-            },
-            {
-                "questionText": "Which of the following scenarios represents a critical violation of Segregation of Duties (SoD) within an IT department?",
-                "options": [
-                    "A systems analyst writes the code for a new accounting application.",
-                    "A database administrator designs the schema for a new relational database.",
-                    "A computer programmer approves and migrates their own code changes into the production environment.",
-                    "A security administrator assigns user access rights based on approved management requests."
-                ],
-                "correctOptionIndex": 2,
-                "explanations": [
-                    "Incorrect. Writing code is a standard responsibility for systems analysts/programmers and does not violate SoD on its own.",
-                    "Incorrect. Designing database schemas is the primary job function of a database administrator.",
-                    "Correct! A programmer migrating their own code into production is a massive SoD violation, as they could introduce malicious or untested code without oversight.",
-                    "Incorrect. A security administrator provisioning access based on management approval represents properly functioning, segregated IT controls."
-                ]
-            },
-            {
-                "questionText": "During which phase of the System Development Life Cycle (SDLC) is User Acceptance Testing (UAT) typically performed?",
-                "options": [
-                    "Design Phase",
-                    "Implementation Phase",
-                    "Testing Phase",
-                    "Maintenance Phase"
-                ],
-                "correctOptionIndex": 2,
-                "explanations": [
-                    "Incorrect. The Design phase focuses on creating the blueprints and architecture for the system, before any testing can occur.",
-                    "Incorrect. The Implementation (or development) phase is when the actual coding happens. Testing comes afterward.",
-                    "Correct! User Acceptance Testing (UAT) occurs during the Testing phase. End-users verify the system meets their business needs before it is deployed.",
-                    "Incorrect. Maintenance occurs after the system has gone live into production."
-                ]
-            },
-            {
-                "questionText": "A hospital's electronic health records (EHR) system automatically grants data access permissions based on whether a user's job title is 'Doctor', 'Nurse', or 'Billing Clerk'. Which access control model is this?",
-                "options": [
-                    "Discretionary Access Control (DAC)",
-                    "Mandatory Access Control (MAC)",
-                    "Role-Based Access Control (RBAC)",
-                    "Attribute-Based Access Control (ABAC)"
-                ],
-                "correctOptionIndex": 2,
-                "explanations": [
-                    "Incorrect. DAC allows the owner of the data to decide who gets access. An automated system based on job titles does not use DAC.",
-                    "Incorrect. MAC uses strict security clearance levels (e.g., Top Secret, Confidential) rather than job functions.",
-                    "Correct! Role-Based Access Control (RBAC) assigns permissions based on a user's specific role or job title within the organization.",
-                    "Incorrect. ABAC uses environmental or context attributes (like time of day or user location), whereas this scenario relies strictly on job titles."
-                ]
-            },
-            {
-                "questionText": "In a Public Key Infrastructure (PKI) system, if an accountant wants to send an encrypted financial report to an external auditor, which key should the accountant use to encrypt the document to ensure only the auditor can read it?",
-                "options": [
-                    "The accountant's public key",
-                    "The accountant's private key",
-                    "The auditor's public key",
-                    "The auditor's private key"
-                ],
-                "correctOptionIndex": 2,
-                "explanations": [
-                    "Incorrect. Encrypting with the accountant's public key would mean only the accountant could decrypt it with their private key.",
-                    "Incorrect. Encrypting with a private key is used to create a digital signature to prove identity, not to encrypt data for confidentiality.",
-                    "Correct! In asymmetric encryption, the sender encrypts the message using the recipient's public key. Then, only the recipient has the private key needed to decrypt it.",
-                    "Incorrect. The accountant would never have access to the auditor's private key; private keys must remain completely secret."
-                ]
-            },
-            {
-                "questionText": "According to standard incident response frameworks (like NIST), what is the immediate next step after a cybersecurity breach has been successfully contained?",
-                "options": [
-                    "Preparation",
-                    "Eradication",
-                    "Recovery",
-                    "Post-Incident Activity"
-                ],
-                "correctOptionIndex": 1,
-                "explanations": [
-                    "Incorrect. Preparation is the very first phase, occurring before an incident ever happens.",
-                    "Correct! Once an incident is contained (stopping the spread), the next step is Eradication (removing the malware/threat from the network).",
-                    "Incorrect. Recovery comes after Eradication. You cannot safely restore systems (Recovery) until the threat is completely removed.",
-                    "Incorrect. Post-Incident Activity (Lessons Learned) is the final step after systems are fully recovered."
-                ]
-            },
-            {
-                "questionText": "Which of the following network security devices is specifically designed to monitor traffic for suspicious activity and alert administrators, but does NOT actively block the traffic?",
-                "options": [
-                    "Firewall",
-                    "Intrusion Detection System (IDS)",
-                    "Intrusion Prevention System (IPS)",
-                    "Virtual Private Network (VPN)"
-                ],
-                "correctOptionIndex": 1,
-                "explanations": [
-                    "Incorrect. A firewall actively blocks or allows traffic based on a predefined set of security rules.",
-                    "Correct! An Intrusion Detection System (IDS) is passive. It monitors traffic and sends alerts for suspicious behavior but does not block the traffic.",
-                    "Incorrect. An Intrusion Prevention System (IPS) is active; it both monitors traffic and actively blocks threats when detected.",
-                    "Incorrect. A VPN creates an encrypted tunnel for secure communication; it is not a monitoring or alerting device."
-                ]
-            },
-            {
-                "questionText": "A payroll processing service organization is asked by a client to provide a report covering the operational effectiveness of its security and processing integrity controls over the past 12 months. The report contains sensitive technical details and must be restricted to management and user auditors. Which report is required?",
-                "options": [
-                    "SOC 1 Type 2",
-                    "SOC 2 Type 2",
-                    "SOC 3",
-                    "SOC for Cybersecurity"
-                ],
-                "correctOptionIndex": 1,
-                "explanations": [
-                    "Incorrect. SOC 1 reports focus on Internal Controls over Financial Reporting (ICFR), not broadly on security and processing integrity.",
-                    "Correct! A SOC 2 Type 2 covers Trust Services Criteria (security, processing integrity) over a period of time and is restricted use due to the sensitive control details included.",
-                    "Incorrect. While SOC 3 covers Trust Services Criteria, it is a general-use report that does not contain sensitive technical details or a description of the auditor's testing.",
-                    "Incorrect. SOC for Cybersecurity is an entity-wide report, not specific to a service organization's system provided to user entities."
-                ]
-            },
-            {
-                "questionText": "Within a SOC 2 engagement, the service organization implements strict data encryption and redaction policies to ensure that client trade secrets are protected from unauthorized disclosure. This primarily addresses which Trust Services Criteria?",
-                "options": [
-                    "Security",
-                    "Availability",
-                    "Processing Integrity",
-                    "Confidentiality"
-                ],
-                "correctOptionIndex": 3,
-                "explanations": [
-                    "Incorrect. While Security (the common criteria) encompasses protection against unauthorized access generally, protecting specific sensitive data like trade secrets aligns more directly with Confidentiality.",
-                    "Incorrect. Availability ensures the system is operational and usable, not that data is kept secret.",
-                    "Incorrect. Processing Integrity ensures data is processed completely, accurately, and on time, which is unrelated to redaction or trade secrets.",
-                    "Correct! Confidentiality specifically addresses the protection of information designated as restricted or sensitive, such as intellectual property or trade secrets, from unauthorized disclosure."
-                ]
-            }
-        ];
+        const questionBank = {
+            FAR: [
+                {
+                    "questionText": "Under ASC 606, what is the first step in the five-step model for revenue recognition?",
+                    "options": [
+                        "Determine the transaction price.",
+                        "Allocate the transaction price to the performance obligations.",
+                        "Identify the contract with the customer.",
+                        "Identify the performance obligations in the contract."
+                    ],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. This is step 3.", "Incorrect. This is step 4.", "Correct! Step 1 is to Identify the contract(s) with a customer.", "Incorrect. This is step 2."]
+                },
+                {
+                    "questionText": "For a lessee, how is a finance lease initially recorded on the balance sheet?",
+                    "options": [
+                        "As rent expense over the lease term.",
+                        "As a Right-of-Use (ROU) asset and a lease liability.",
+                        "Only as a footnote disclosure.",
+                        "As property, plant, and equipment without a liability."
+                    ],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Rent expense is for short-term operating leases.", "Correct! Under ASC 842, lessees record both an ROU asset and a corresponding lease liability.", "Incorrect. Operating and finance leases > 12 months must be capitalized.", "Incorrect. A corresponding liability must be recorded."]
+                },
+                {
+                    "questionText": "When calculating Basic Earnings Per Share (EPS), which of the following is deducted from Net Income in the numerator?",
+                    "options": ["Common stock dividends declared", "Preferred stock dividends declared", "Interest expense on bonds", "Treasury stock purchases"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Basic EPS is earnings available to common shareholders, so common dividends are not deducted.", "Correct! Preferred dividends must be subtracted from Net Income to find the earnings available to common shareholders.", "Incorrect. Interest expense is already accounted for in Net Income.", "Incorrect. Treasury stock affects the denominator (weighted average shares), not the numerator directly."]
+                },
+                {
+                    "questionText": "How are unrealized holding gains and losses on Available-for-Sale (AFS) debt securities generally reported?",
+                    "options": ["In Net Income", "In Other Comprehensive Income (OCI)", "Directly to Retained Earnings", "They are not reported until realized"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Trading securities are reported in Net Income.", "Correct! Unrealized gains/losses on AFS debt securities bypass the income statement and go to OCI.", "Incorrect. They go to Accumulated OCI, not directly to Retained Earnings.", "Incorrect. They must be marked to fair value each reporting period."]
+                },
+                {
+                    "questionText": "During a period of rising prices, which inventory cost flow assumption will result in the highest reported Net Income?",
+                    "options": ["LIFO", "FIFO", "Weighted Average", "Specific Identification"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. LIFO matches newer, higher costs to COGS, lowering Net Income.", "Correct! FIFO matches older, lower costs to COGS, resulting in higher Net Income during inflation.", "Incorrect. Weighted average falls between LIFO and FIFO.", "Incorrect. Specific identification depends on the exact units sold."]
+                },
+                {
+                    "questionText": "When testing Goodwill for impairment, at what level is the test generally performed?",
+                    "options": ["The individual asset level", "The reporting unit level", "The corporate entity level", "The operating segment level"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Goodwill cannot be separated from the business as a whole.", "Correct! Under US GAAP, goodwill impairment testing is performed at the reporting unit level.", "Incorrect. It must be allocated and tested below the total corporate level.", "Incorrect. A reporting unit is an operating segment or one level below it."]
+                },
+                {
+                    "questionText": "On a statement of cash flows prepared using the indirect method, how is an increase in Accounts Receivable treated?",
+                    "options": ["Added to net income in operating activities", "Deducted from net income in operating activities", "Reported as an investing cash outflow", "Reported as a financing cash outflow"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. An increase in A/R means cash wasn't collected yet, so it reduces operating cash.", "Correct! An increase in a current asset (like A/R) is deducted from net income to arrive at cash from operations.", "Incorrect. A/R is an operating item.", "Incorrect. A/R relates to daily operations, not financing."]
+                },
+                {
+                    "questionText": "What is the correct accounting treatment for an Asset Retirement Obligation (ARO)?",
+                    "options": ["Expensed immediately when the asset is acquired", "Recorded as a liability at fair value when incurred", "Disclosed only in the notes until retirement occurs", "Recorded as a liability at its undiscounted future value"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. It must be capitalized into the asset cost.", "Correct! An ARO is recognized as a liability at its present (fair) value when the legal obligation is incurred.", "Incorrect. AROs require balance sheet recognition.", "Incorrect. It must be recorded at its present (discounted) value."]
+                },
+                {
+                    "questionText": "In a nonmonetary exchange that lacks commercial substance, if no boot (cash) is received, how is a gain treated?",
+                    "options": ["The gain is fully recognized", "The gain is deferred", "The gain is recognized proportionately", "The gain is credited to OCI"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Full recognition requires commercial substance.", "Correct! If the transaction lacks commercial substance and no boot is received, any realized gain is fully deferred.", "Incorrect. Proportionate recognition happens when some boot is received.", "Incorrect. It affects the basis of the new asset, not OCI."]
+                },
+                {
+                    "questionText": "Which of the following is a recognized subsequent event requiring adjustment to the financial statements?",
+                    "options": ["A major acquisition occurring after year-end", "Settlement of litigation for an amount different than estimated at year-end", "A fire destroying a plant after year-end", "Issuance of new bonds after year-end"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. This is a non-recognized event (disclosure only).", "Correct! The litigation existed at the balance sheet date; the settlement provides better info about the liability, requiring adjustment.", "Incorrect. This did not exist at the balance sheet date (disclosure only).", "Incorrect. Capital events after year-end are disclosure only."]
+                }
+            ],
+            AUD: [
+                {
+                    "questionText": "Which of the following best describes 'Inherent Risk' in the Audit Risk Model?",
+                    "options": ["The risk that the auditor will not detect a material misstatement.", "The susceptibility of an assertion to a material misstatement, assuming no related controls.", "The risk that internal controls will fail to prevent a material misstatement.", "The risk that the auditor expresses an inappropriate audit opinion."],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. This describes Detection Risk.", "Correct! Inherent risk is the natural susceptibility of an account to error or fraud before considering internal controls.", "Incorrect. This describes Control Risk.", "Incorrect. This is the definition of overall Audit Risk."]
+                },
+                {
+                    "questionText": "A Service Organization Control (SOC) 1, Type 2 report includes which of the following that a Type 1 report does NOT?",
+                    "options": ["A description of the service organization's system", "Management's assertion regarding the design of controls", "An auditor's opinion on the operating effectiveness of controls over a period of time", "A description of the auditor's independence"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Both Type 1 and Type 2 include this.", "Incorrect. Both include an assessment of control design.", "Correct! A Type 2 report includes testing of operating effectiveness over a period (usually 6-12 months), while Type 1 only looks at design at a point in time.", "Incorrect. Auditor independence is required for both."]
+                },
+                {
+                    "questionText": "If an auditor is unable to obtain sufficient appropriate audit evidence due to a management-imposed scope limitation, and the potential effect is pervasive, what type of opinion should be issued?",
+                    "options": ["Unmodified with an Emphasis-of-Matter paragraph", "Qualified opinion", "Adverse opinion", "Disclaimer of opinion"],
+                    "correctOptionIndex": 3,
+                    "explanations": ["Incorrect. Unmodified implies sufficient evidence was obtained.", "Incorrect. A qualified opinion is for material but non-pervasive scope limitations.", "Incorrect. Adverse is used when statements are materially misstated, not when evidence is lacking.", "Correct! A pervasive scope limitation requires the auditor to disclaim an opinion entirely."]
+                },
+                {
+                    "questionText": "Under AICPA independence rules, which of the following financial interests impairs an auditor's independence?",
+                    "options": ["A direct financial interest, regardless of materiality.", "An indirect financial interest, regardless of materiality.", "A collateralized auto loan from a client financial institution.", "A credit card balance of $5,000 from a client financial institution."],
+                    "correctOptionIndex": 0,
+                    "explanations": ["Correct! Any direct financial interest in a client, material or not, impairs independence.", "Incorrect. Indirect interests only impair independence if they are material.", "Incorrect. Collateralized auto loans made under normal lending procedures are permitted.", "Incorrect. Credit card balances are permitted if kept under $10,000."]
+                },
+                {
+                    "questionText": "Proper segregation of duties requires separating which three functions?",
+                    "options": ["Authorization, Recordkeeping, and Custody", "Authorization, Execution, and Review", "Custody, Execution, and Reconciliation", "Recordkeeping, Reconciliation, and Review"],
+                    "correctOptionIndex": 0,
+                    "explanations": ["Correct! The classic 'ARC' triangle requires separating Authorization of transactions, Recording them in the books, and Custody of the related assets.", "Incorrect. Review is a monitoring control, not one of the primary three.", "Incorrect. Custody and Execution are not the standard trio.", "Incorrect. ARC is the standard model."]
+                },
+                {
+                    "questionText": "Which procedure is primarily designed to detect material misstatements at the assertion level?",
+                    "options": ["Test of controls", "Risk assessment procedures", "Substantive procedures", "Walkthroughs"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Tests of controls evaluate the operating effectiveness of the control, not the dollar amount.", "Incorrect. Risk assessment plans the audit.", "Correct! Substantive procedures (analytical procedures and tests of details) are designed to find actual dollar misstatements.", "Incorrect. Walkthroughs help understand the process design."]
+                },
+                {
+                    "questionText": "When an auditor vouches a sample of recorded sales invoices back to shipping documents, which assertion is primarily being tested?",
+                    "options": ["Completeness", "Occurrence", "Valuation", "Classification"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Testing completeness would mean tracing from shipping documents forward to the sales journal.", "Correct! Vouching backwards from the journal to source documents tests Occurrence (did the recorded sale actually happen?).", "Incorrect. Valuation deals with the correct dollar amount.", "Incorrect. Classification ensures it is in the right account."]
+                },
+                {
+                    "questionText": "If an auditor has substantial doubt about a client's ability to continue as a going concern, but the client has adequately disclosed this in the footnotes, what is the auditor's reporting responsibility?",
+                    "options": ["Issue a qualified opinion", "Issue an adverse opinion", "Add an emphasis-of-matter paragraph to an unmodified opinion", "Require management to restate the financials to liquidation basis"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. The statements are fairly presented per GAAP with adequate disclosure.", "Incorrect. Adverse is not appropriate if disclosures are adequate.", "Correct! The auditor issues an unmodified opinion but must add an emphasis-of-matter paragraph explicitly mentioning 'going concern'.", "Incorrect. Liquidation basis is only used if liquidation is imminent."]
+                },
+                {
+                    "questionText": "Which type of audit sampling is most commonly used for substantive testing to estimate the monetary value of a population?",
+                    "options": ["Attribute sampling", "Discovery sampling", "Variables sampling", "Stop-or-go sampling"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Attribute sampling is used for tests of controls (yes/no questions).", "Incorrect. Discovery sampling is used when looking for critical exceptions like fraud.", "Correct! Variables sampling is used to estimate continuous variables, like the total dollar value of an account balance.", "Incorrect. Stop-or-go is a variation of attribute sampling."]
+                },
+                {
+                    "questionText": "The risk of incorrect acceptance in substantive testing relates to:",
+                    "options": ["Audit efficiency", "Audit effectiveness", "Control risk", "Inherent risk"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Incorrect rejection relates to efficiency (doing more work than needed).", "Correct! Incorrect acceptance means accepting a materially misstated balance as correct, which compromises audit effectiveness and leads to audit failure.", "Incorrect. This relates to substantive sampling, not control risk.", "Incorrect. It is a form of detection risk."]
+                }
+            ],
+            REG: [
+                {
+                    "questionText": "For a corporation to qualify for S-Corporation status, what is the maximum number of shareholders allowed?",
+                    "options": ["50", "75", "100", "Unlimited"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. The limit used to be lower, but it has been increased.", "Incorrect. 75 was a previous historical limit.", "Correct! An S-Corporation may have no more than 100 shareholders (with family members counting as a single shareholder).", "Incorrect. C-Corps have unlimited shareholders."]
+                },
+                {
+                    "questionText": "Under Section 179, what type of property qualifies for immediate expensing?",
+                    "options": ["Intangible assets", "Land", "Tangible personal property used in a trade or business", "Residential rental real estate"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Intangibles are amortized under Section 197.", "Incorrect. Land is never depreciable or expensable.", "Correct! Section 179 applies to tangible personal property (like machinery or equipment) purchased for use in an active trade or business.", "Incorrect. Real property generally does not qualify for Section 179."]
+                },
+                {
+                    "questionText": "In a Like-Kind Exchange (Section 1031), what types of property are currently eligible for tax deferral?",
+                    "options": ["Stocks and bonds", "Inventory", "Real property used in a business or held for investment", "Personal property like machinery"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Financial instruments are excluded.", "Incorrect. Inventory held for sale is excluded.", "Correct! Following the TCJA of 2017, Section 1031 exchanges are strictly limited to real property.", "Incorrect. Personal property like machinery no longer qualifies for 1031 treatment."]
+                },
+                {
+                    "questionText": "Under the Statute of Frauds, which of the following contracts must be in writing to be enforceable?",
+                    "options": ["A contract to purchase a $300 lawnmower", "A contract to perform services within 6 months", "A contract for the sale of an interest in real estate", "A month-to-month residential lease"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Sales of goods only require a writing if $500 or more (UCC).", "Incorrect. Contracts performable within one year do not require a writing.", "Correct! Contracts for the sale of land or an interest in real estate must always be in writing under the Statute of Frauds.", "Incorrect. Leases under one year are generally exempt."]
+                },
+                {
+                    "questionText": "How does a partnership report its income to its partners?",
+                    "options": ["Form 1120", "Schedule C", "Schedule K-1", "Form 1099-DIV"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Form 1120 is for C-Corporations.", "Incorrect. Schedule C is for Sole Proprietorships.", "Correct! A partnership files an informational return (Form 1065) and issues a Schedule K-1 to each partner showing their share of income, deductions, and credits.", "Incorrect. 1099-DIV is for corporate dividends."]
+                },
+                {
+                    "questionText": "Which of the following is deductible as an itemized deduction on Schedule A?",
+                    "options": ["Alimony paid (for divorces finalized in 2020)", "Unreimbursed employee business expenses", "State and local income taxes (up to $10,000)", "Child support payments"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Alimony is not deductible for divorces finalized after 2018.", "Incorrect. The TCJA eliminated miscellaneous itemized deductions subject to the 2% floor.", "Correct! State and local taxes (SALT) are deductible on Schedule A, capped at $10,000 per year.", "Incorrect. Child support is never tax deductible."]
+                },
+                {
+                    "questionText": "Under MACRS, what is the recovery period for standard office furniture and fixtures?",
+                    "options": ["3 years", "5 years", "7 years", "15 years"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. 3-year property includes software and specialized tools.", "Incorrect. 5-year property includes computers, vehicles, and copiers.", "Correct! Under MACRS, office furniture, fixtures, and equipment are classified as 7-year property.", "Incorrect. 15-year property includes land improvements."]
+                },
+                {
+                    "questionText": "Under the 'wash sale' rule, a loss on the sale of stock is disallowed if the taxpayer purchases substantially identical stock within what timeframe?",
+                    "options": ["15 days before or after the sale", "30 days before or after the sale", "60 days after the sale", "By the end of the tax year"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. The window is wider than 15 days.", "Correct! A wash sale occurs if you buy substantially identical securities within 30 days before or 30 days after the sale resulting in a loss.", "Incorrect. It includes the 30 days prior as well.", "Incorrect. The rule is based on a strict 61-day window surrounding the sale date."]
+                },
+                {
+                    "questionText": "In a Chapter 7 bankruptcy liquidation, which of the following unsecured claims has the highest priority for payment?",
+                    "options": ["Domestic support obligations (child support)", "General unsecured creditors", "Employee wages earned within 180 days prior to filing", "Taxes owed to the government"],
+                    "correctOptionIndex": 0,
+                    "explanations": ["Correct! Domestic support obligations (alimony, child support) hold the very highest priority among unsecured claims in bankruptcy.", "Incorrect. General creditors are paid last.", "Incorrect. Wages are high priority, but rank below domestic support and administrative expenses.", "Incorrect. Taxes are priority but rank below support and wages."]
+                },
+                {
+                    "questionText": "Under IRS Circular 230, a tax practitioner may charge a contingent fee for which of the following services?",
+                    "options": ["Preparing an original tax return", "Providing tax advice on a future transaction", "Representing a client before the IRS in an examination of an original return", "Preparing a standard amended return claiming a refund"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Contingent fees for original returns are strictly prohibited.", "Incorrect. Contingent fees cannot be charged for standard tax planning.", "Correct! Circular 230 allows contingent fees for services in connection with an IRS examination of or challenge to an original tax return.", "Incorrect. Unless the IRS initiates the review, amended returns generally cannot have contingent fees."]
+                }
+            ],
+            BAR: [
+                {
+                    "questionText": "In the COSO Enterprise Risk Management (ERM) framework, which component focuses on tone at the top and core values?",
+                    "options": ["Strategy and Objective-Setting", "Performance", "Governance and Culture", "Review and Revision"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. This aligns strategy with the organization's risk appetite.", "Incorrect. Performance involves identifying, assessing, and responding to risk.", "Correct! Governance and Culture sets the organization's tone, reinforcing ERM importance, and establishing oversight responsibilities.", "Incorrect. Review focuses on assessing changes and ERM effectiveness over time."]
+                },
+                {
+                    "questionText": "Under the modified accrual basis of accounting used by governmental funds, when are revenues recognized?",
+                    "options": ["When cash is received", "When earned, regardless of cash flow", "When they become measurable and available", "When the budget is officially adopted"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. This is strictly cash-basis accounting.", "Incorrect. This is full accrual accounting used by enterprise funds and commercial businesses.", "Correct! Under modified accrual, revenues are recognized when they are both measurable (can be quantified) and available (collectible within the current period or soon enough thereafter).", "Incorrect. The budget adoption records appropriations, not actual revenue."]
+                },
+                {
+                    "questionText": "Which data visualization is best suited for showing the composition of a whole over time (e.g., product line sales percentages over 12 months)?",
+                    "options": ["Scatter plot", "Stacked area chart", "Box and whisker plot", "Waterfall chart"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Scatter plots show correlations between two variables.", "Correct! A stacked area chart perfectly displays both the total trend over time and the breakdown of the parts that make up that whole.", "Incorrect. Box plots show statistical distribution and outliers.", "Incorrect. Waterfall charts show how a starting value is affected by a series of positive and negative changes."]
+                },
+                {
+                    "questionText": "In standard costing, what does an unfavorable direct materials quantity variance indicate?",
+                    "options": ["The company paid more per unit of material than expected.", "The company used more units of material to produce the product than standard.", "The company produced fewer units of the final product than budgeted.", "The purchasing department failed to negotiate bulk discounts."],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. This describes an unfavorable price variance.", "Correct! A quantity (or usage) variance isolates the amount of material used. Unfavorable means workers used more raw materials than the standard allowed.", "Incorrect. Production volume is handled by volume variances.", "Incorrect. Price negotiation issues relate to the price variance."]
+                },
+                {
+                    "questionText": "When evaluating capital budgeting projects, what is the major advantage of the Net Present Value (NPV) method over the Internal Rate of Return (IRR) method?",
+                    "options": ["NPV uses accounting income instead of cash flows.", "NPV is easier to explain to non-financial managers as a percentage.", "NPV assumes cash flows are reinvested at the firm's cost of capital.", "NPV ignores the time value of money."],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. Both methods rely strictly on cash flows.", "Incorrect. IRR provides a percentage; NPV provides a dollar amount.", "Correct! NPV assumes cash flows are reinvested at the realistic hurdle rate (cost of capital), whereas IRR assumes they are reinvested at the IRR itself, which is often unrealistic.", "Incorrect. Both NPV and IRR discount for the time value of money."]
+                },
+                {
+                    "questionText": "How does an increase in the corporate tax rate affect a company's Weighted Average Cost of Capital (WACC)?",
+                    "options": ["It increases WACC because equity becomes more expensive.", "It decreases WACC because the after-tax cost of debt is reduced.", "It has no effect on WACC.", "It increases WACC because debt becomes more expensive."],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Tax rates do not directly impact the cost of equity.", "Correct! Because interest payments on debt are tax-deductible, a higher tax rate increases the tax shield, lowering the after-tax cost of debt and thus lowering overall WACC.", "Incorrect. Taxes specifically impact the debt component.", "Incorrect. Debt becomes cheaper on an after-tax basis."]
+                },
+                {
+                    "questionText": "In a relational database, what type of SQL command is used to combine rows from two or more tables based on a related column between them?",
+                    "options": ["SELECT", "UNION", "JOIN", "UPDATE"],
+                    "correctOptionIndex": 2,
+                    "explanations": ["Incorrect. SELECT retrieves data but doesn't inherently link tables without a specific clause.", "Incorrect. UNION combines the result sets of two identical queries, not columns based on a key.", "Correct! A JOIN clause (like INNER JOIN) links tables together using foreign keys to query related data.", "Incorrect. UPDATE modifies existing data."]
+                },
+                {
+                    "questionText": "For a lessor, a lease that transfers substantially all the risks and rewards of ownership to the lessee, and collects a manufacturer's profit, is classified as a:",
+                    "options": ["Operating lease", "Sales-type lease", "Direct financing lease", "Short-term lease"],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. Operating leases keep risks/rewards with the lessor.", "Correct! Under ASC 842, if risks transfer AND a profit is recognized upfront (fair value > carrying amount), it is a Sales-Type lease.", "Incorrect. Direct financing leases transfer risks but do not involve upfront manufacturer/dealer profit.", "Incorrect. This involves terms less than 12 months."]
+                },
+                {
+                    "questionText": "In pension accounting, the projected benefit obligation (PBO) represents the present value of all benefits attributed to:",
+                    "options": ["Employee service rendered to date, ignoring future salary increases.", "Employee service rendered to date, including assumptions about future salary increases.", "Total expected service until retirement.", "Vested benefits only."],
+                    "correctOptionIndex": 1,
+                    "explanations": ["Incorrect. This is the definition of the Accumulated Benefit Obligation (ABO).", "Correct! The PBO calculates the obligation using service to date but factors in expected future compensation levels.", "Incorrect. It only includes service rendered *to date*.", "Incorrect. That is the Vested Benefit Obligation (VBO)."]
+                },
+                {
+                    "questionText": "Which type of derivative contract requires a premium to be paid upfront?",
+                    "options": ["Forward contract", "Futures contract", "Interest rate swap", "Options contract"],
+                    "correctOptionIndex": 3,
+                    "explanations": ["Incorrect. Forwards are negotiated agreements that typically have no upfront cost.", "Incorrect. Futures require a margin account but not an upfront non-refundable premium.", "Incorrect. Swaps do not generally require an upfront premium.", "Correct! To purchase an Option (the right but not the obligation to buy/sell), the buyer must pay an upfront premium to the seller."]
+                }
+            ]
+        };
 
+        let currentSection = '';
         let currentQuestionIndex = 0;
         let score = parseInt(localStorage.getItem('iscQuestScore')) || 0;
         let streak = parseInt(localStorage.getItem('iscQuestStreak')) || 0;
@@ -489,6 +585,7 @@
         const scoreValue = document.getElementById('score-value');
         const streakValue = document.getElementById('streak-value');
         const questProgress = document.getElementById('quest-progress');
+        const progressLabel = document.getElementById('progress-label');
         const questionText = document.getElementById('question-text');
         const optionsContainer = document.getElementById('options-container');
         const feedbackBox = document.getElementById('feedback-box');
@@ -496,12 +593,12 @@
         const feedbackExplanation = document.getElementById('feedback-explanation');
         const nextBtn = document.getElementById('next-btn');
 
-        function startQuest() {
+        const menuScreen = document.getElementById('menu-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+
+        function initApp() {
             updateStreak();
             updateRankAndScore();
-            activeQuestions = [...rawQuestionsData].sort(() => Math.random() - 0.5); 
-            questProgress.max = activeQuestions.length;
-            renderQuestion();
         }
 
         function updateStreak() {
@@ -529,17 +626,34 @@
             scoreValue.innerText = score;
             localStorage.setItem('iscQuestScore', score);
 
-            if (score < 50) {
+            if (score < 100) {
                 rankIcon.innerText = "🐭"; rankTitle.innerText = "Mouseketeer Clerk";
-            } else if (score < 150) {
+            } else if (score < 250) {
                 rankIcon.innerText = "🦆"; rankTitle.innerText = "Scrooge McDuck's Apprentice";
-            } else if (score < 300) {
-                rankIcon.innerText = "🧞‍♂️"; rankTitle.innerText = "Genie of the Ledger";
             } else if (score < 500) {
+                rankIcon.innerText = "🧞‍♂️"; rankTitle.innerText = "Genie of the Ledger";
+            } else if (score < 800) {
                 rankIcon.innerText = "🧚‍♀️"; rankTitle.innerText = "Fairy Godmother of Audits";
             } else {
                 rankIcon.innerText = "👑"; rankTitle.innerText = "Disney CPA Royalty";
             }
+        }
+
+        function startSection(sectionId) {
+            currentSection = sectionId;
+            currentQuestionIndex = 0;
+            
+            // Clone and shuffle the 10 questions for the selected section
+            activeQuestions = [...questionBank[sectionId]].sort(() => Math.random() - 0.5); 
+            
+            questProgress.max = activeQuestions.length;
+            progressLabel.innerText = `Journey through ${sectionId} 🏰:`;
+            
+            // Switch UI
+            menuScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            
+            renderQuestion();
         }
 
         function renderQuestion() {
@@ -556,6 +670,9 @@
                 btn.onclick = () => checkAnswer(index, btn, currentQ);
                 optionsContainer.appendChild(btn);
             });
+            
+            nextBtn.innerText = "Next Magical Challenge ✨";
+            nextBtn.onclick = handleNext;
         }
 
         function checkAnswer(selectedIndex, clickedButton, currentQ) {
@@ -570,7 +687,6 @@
                 score += 10;
                 updateRankAndScore();
 
-                // Magical Disney Confetti Colors (Gold, Light Blue, Pink)
                 confetti({
                     particleCount: 120,
                     spread: 80,
@@ -588,17 +704,26 @@
             feedbackBox.classList.remove('hidden');
         }
 
-        nextBtn.onclick = () => {
+        function handleNext() {
             currentQuestionIndex++;
             if (currentQuestionIndex < activeQuestions.length) {
                 renderQuestion();
             } else {
                 questProgress.value = activeQuestions.length;
-                questionText.innerText = "🎆 Happily Ever After! You've mastered the Magic Mirror's questions.";
+                questionText.innerText = `🎆 Happily Ever After! You've conquered ${currentSection}.`;
                 optionsContainer.innerHTML = '';
-                feedbackBox.classList.add('hidden');
                 
-                // Big Castle Fireworks Confetti
+                feedbackTitle.innerText = "Quest Complete!";
+                feedbackExplanation.innerText = "Choose another path from the Magic Mirror to continue your journey.";
+                nextBtn.innerText = "Return to Magic Mirror 🪞";
+                
+                // Switch button behavior to return to menu
+                nextBtn.onclick = () => {
+                    quizScreen.classList.add('hidden');
+                    menuScreen.classList.remove('hidden');
+                    feedbackBox.classList.add('hidden');
+                };
+                
                 const duration = 3 * 1000;
                 const end = Date.now() + duration;
                 (function frame() {
@@ -607,9 +732,10 @@
                     if (Date.now() < end) requestAnimationFrame(frame);
                 }());
             }
-        };
+        }
 
-        window.addEventListener('DOMContentLoaded', startQuest);
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
