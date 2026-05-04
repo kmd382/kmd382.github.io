@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kristin DeMatteo | Finance & Accounting Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --stone: #2c2c2c;
@@ -13,6 +14,12 @@
             --beige: #f9f7f2;
             --white: #ffffff;
             --border-grey: #e0ddd5;
+            
+            /* CPA Quest Variables */
+            --cpa-bg: #1a1a2e;       
+            --cpa-gold: #f9a826;     
+            --cpa-parchment: #fcfcf3;
+            --cpa-text: #2b2b2b;     
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -77,41 +84,15 @@
         .education-box h3 { color: var(--white); margin-bottom: 10px; font-size: 1.8rem; }
         .education-box p { color: var(--tan); font-size: 1.1rem; margin-bottom: 5px; }
 
-        /* Journey Styling - Condensing the Experience */
+        /* Journey Styling */
         .journey-container { max-width: 900px; margin: 0 auto; }
-        
-        .journey-item {
-            margin-bottom: 60px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid var(--border-grey);
-        }
-        
+        .journey-item { margin-bottom: 60px; padding-bottom: 30px; border-bottom: 1px solid var(--border-grey); }
         .journey-item:last-child { border-bottom: none; }
-
-        .journey-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 15px;
-        }
-
+        .journey-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
         .journey-header h3 { font-size: 1.5rem; color: var(--stone); }
         .journey-meta { font-size: 0.85rem; color: var(--tan); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-
         .journey-text { color: var(--slate); font-size: 1.05rem; text-align: justify; }
-
-        .incoming-badge {
-            display: inline-block;
-            background-color: var(--tan);
-            color: var(--white);
-            padding: 5px 15px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            border-radius: 2px;
-        }
+        .incoming-badge { display: inline-block; background-color: var(--tan); color: var(--white); padding: 5px 15px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; border-radius: 2px; }
 
         /* Skills Grid */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
@@ -119,7 +100,51 @@
         .skill-card:hover { border-color: var(--tan); transform: translateY(-5px); }
         .skill-card h3 { font-size: 1.1rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; color: var(--tan); }
 
-        footer { background: var(--stone); color: var(--white); padding: 80px 10%; text-align: center; }
+        /* --- 🧙‍♂️ CPA QUEST APP STYLES --- */
+        #cpa-quest { background-color: var(--stone); color: var(--white); }
+        #cpa-quest .section-title { color: var(--white); }
+        
+        .cpa-app-container {
+            background-color: var(--cpa-bg);
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Keep app feel distinct */
+        }
+
+        .cpa-hud { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid var(--cpa-gold); margin-bottom: 30px; }
+        .cpa-rank-display { font-size: 1.2rem; font-weight: bold; color: white;}
+        .cpa-stats { display: flex; gap: 25px; font-size: 1.1rem; font-weight: bold; color: var(--cpa-gold); }
+
+        .cpa-progress-container { display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--cpa-gold); font-weight: bold; margin-bottom: 20px; }
+        .cpa-progress-container progress { width: 100%; height: 12px; border-radius: 10px; appearance: none; }
+        .cpa-progress-container progress::-webkit-progress-bar { background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        .cpa-progress-container progress::-webkit-progress-value { background-color: var(--cpa-gold); border-radius: 10px; box-shadow: 0 0 10px var(--cpa-gold); }
+
+        .cpa-scroll { background-color: var(--cpa-parchment); color: var(--cpa-text); padding: 30px; border-radius: 12px; }
+        .cpa-scroll h2 { font-size: 1.3rem; line-height: 1.5; margin-bottom: 25px; border-bottom: 2px dashed #ddd; padding-bottom: 20px; color: var(--cpa-text); font-family: 'Segoe UI', sans-serif;}
+
+        .cpa-options { display: flex; flex-direction: column; gap: 12px; }
+        .cpa-options button { background-color: white; color: var(--cpa-text); border: 2px solid #ccc; padding: 15px; font-size: 1rem; font-weight: 500; text-align: left; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+        .cpa-options button:hover:not(:disabled) { border-color: var(--cpa-gold); background-color: #fffaf0; transform: translateY(-2px); }
+        .cpa-options button:disabled { cursor: not-allowed; opacity: 0.7; }
+
+        .cpa-feedback { margin-top: 25px; padding: 20px; border-radius: 8px; background-color: #f5f5f5; border-left: 5px solid var(--cpa-gold); animation: fadeIn 0.4s ease-in; }
+        .cpa-feedback h3 { margin-bottom: 10px; font-size: 1.2rem; font-family: 'Segoe UI', sans-serif;}
+        .cpa-feedback p { font-size: 1rem; line-height: 1.5; margin-bottom: 20px; }
+        
+        .cpa-next-btn { background-color: var(--cpa-bg); color: white; border: 2px solid var(--cpa-gold); padding: 12px 24px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; transition: 0.3s; text-align: center;}
+        .cpa-next-btn:hover { background-color: var(--cpa-gold); color: var(--cpa-bg); }
+
+        .hidden { display: none !important; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-8px); } 80% { transform: translateX(8px); } }
+        .shake-error { animation: shake 0.4s ease-in-out; background-color: #ffcccc !important; border-color: #ff4d4d !important; color: #990000 !important; }
+        .correct-glow { background-color: #ccffcc !important; border-color: #2eb82e !important; color: #006600 !important; }
+
+        footer { background: var(--stone); color: var(--white); padding: 80px 10%; text-align: center; border-top: 1px solid #444;}
         .footer-links { margin: 30px 0; }
         .footer-links a { color: var(--tan); margin: 0 15px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
@@ -128,6 +153,8 @@
             .hero-image { margin-bottom: 40px; }
             .hero-text h1 { font-size: 3rem; }
             .journey-header { flex-direction: column; gap: 5px; }
+            .cpa-hud { flex-direction: column; gap: 15px; }
+            .cpa-app-container { padding: 20px; }
         }
     </style>
 </head>
@@ -140,12 +167,12 @@
             <a href="#education">Education</a>
             <a href="#experience">Professional Journey</a>
             <a href="#skills">Skills</a>
-        </div>
+            <a href="#cpa-quest">CPA Quest App</a> </div>
     </nav>
 
     <header class="hero">
         <div class="hero-image">
-            <img src="ProfilePic.jpeg" >
+            <img src="ProfilePic.jpeg" alt="Kristin DeMatteo">
         </div>
         <div class="hero-text">
             <span class="tagline">Finance & Accounting</span>
@@ -235,6 +262,45 @@
         </div>
     </section>
 
+    <section id="cpa-quest">
+        <h2 class="section-title">Interactive Project: ISC CPA Quest 🧙‍♂️✨</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: #aaa; max-width: 600px; margin-left: auto; margin-right: auto;">
+            I built this gamified study tool using HTML, CSS, and JavaScript to help me prepare for the 2026 AICPA Information Systems and Controls (ISC) Discipline exam. Test your knowledge!
+        </p>
+        
+        <div class="cpa-app-container">
+            <header class="cpa-hud">
+                <div class="cpa-rank-display">
+                    <span id="rank-icon">🧑‍🎓</span> <span id="rank-title">Peasant Bookkeeper</span>
+                </div>
+                <div class="cpa-stats">
+                    <div class="score">🪙 <span id="score-value">0</span></div>
+                    <div class="streak">🐉🔥 <span id="streak-value">0</span> Days</div>
+                </div>
+            </header>
+        
+            <main class="cpa-quest-container">
+                <div class="cpa-progress-container">
+                    <label for="quest-progress">Quest Progress 🗺️:</label>
+                    <progress id="quest-progress" value="0" max="10"></progress>
+                </div>
+        
+                <div class="cpa-scroll">
+                    <h2 id="question-text">Summoning your next challenge... 🔮</h2>
+                    
+                    <div id="options-container" class="cpa-options">
+                        </div>
+                    
+                    <div id="feedback-box" class="cpa-feedback hidden">
+                        <h3 id="feedback-title"></h3>
+                        <p id="feedback-explanation"></p>
+                        <button id="next-btn" class="cpa-next-btn">Next Challenge 🐎💨</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2026 Kristin DeMatteo</p>
         <div class="footer-links">
@@ -244,5 +310,311 @@
         <p style="font-size: 0.75rem; opacity: 0.6; letter-spacing: 1px;">RUTGERS BUSINESS SCHOOL | NEW BRUNSWICK, NJ</p>
     </footer>
 
+    <script>
+        // Embed the JSON directly so the portfolio works instantly without a server!
+        const rawQuestionsData = [
+            {
+                "questionText": "In a relational database architecture, what is the primary purpose of a foreign key?",
+                "options": [
+                    "To uniquely identify each record within a single table.",
+                    "To establish and enforce a link between data in two different tables.",
+                    "To encrypt sensitive data fields from unauthorized database administrators.",
+                    "To index the table to speed up data retrieval queries."
+                ],
+                "correctOptionIndex": 1,
+                "explanations": [
+                    "Incorrect. Uniquely identifying a record within a single table is the purpose of a Primary Key, not a Foreign Key.",
+                    "Correct! A foreign key is a field in one table that uniquely identifies a row of another table, enforcing referential integrity and linking the data.",
+                    "Incorrect. Keys in relational databases are used for structuring and linking data, not for encryption or security masking.",
+                    "Incorrect. While keys are often indexed automatically by the database engine, the primary purpose of a foreign key is establishing relationships, not speeding up retrieval."
+                ]
+            },
+            {
+                "questionText": "An accounting firm wants to develop its own proprietary tax software application but does not want to purchase or manage the underlying operating system, servers, or storage. Which cloud service model should they adopt?",
+                "options": [
+                    "Infrastructure as a Service (IaaS)",
+                    "Platform as a Service (PaaS)",
+                    "Software as a Service (SaaS)",
+                    "On-Premises Infrastructure"
+                ],
+                "correctOptionIndex": 1,
+                "explanations": [
+                    "Incorrect. With IaaS, the firm would still be responsible for installing and managing the operating systems and middleware.",
+                    "Correct! Platform as a Service (PaaS) provides a ready-to-use framework for developers to build applications, while the cloud provider manages the OS, servers, and storage.",
+                    "Incorrect. SaaS delivers a fully finished, ready-to-use software application. The firm wants to build their own software.",
+                    "Incorrect. On-Premises means the firm would have to buy, host, and manage all the hardware and servers themselves."
+                ]
+            },
+            {
+                "questionText": "Which of the following scenarios represents a critical violation of Segregation of Duties (SoD) within an IT department?",
+                "options": [
+                    "A systems analyst writes the code for a new accounting application.",
+                    "A database administrator designs the schema for a new relational database.",
+                    "A computer programmer approves and migrates their own code changes into the production environment.",
+                    "A security administrator assigns user access rights based on approved management requests."
+                ],
+                "correctOptionIndex": 2,
+                "explanations": [
+                    "Incorrect. Writing code is a standard responsibility for systems analysts/programmers and does not violate SoD on its own.",
+                    "Incorrect. Designing database schemas is the primary job function of a database administrator.",
+                    "Correct! A programmer migrating their own code into production is a massive SoD violation, as they could introduce malicious or untested code without oversight.",
+                    "Incorrect. A security administrator provisioning access based on management approval represents properly functioning, segregated IT controls."
+                ]
+            },
+            {
+                "questionText": "During which phase of the System Development Life Cycle (SDLC) is User Acceptance Testing (UAT) typically performed?",
+                "options": [
+                    "Design Phase",
+                    "Implementation Phase",
+                    "Testing Phase",
+                    "Maintenance Phase"
+                ],
+                "correctOptionIndex": 2,
+                "explanations": [
+                    "Incorrect. The Design phase focuses on creating the blueprints and architecture for the system, before any testing can occur.",
+                    "Incorrect. The Implementation (or development) phase is when the actual coding happens. Testing comes afterward.",
+                    "Correct! User Acceptance Testing (UAT) occurs during the Testing phase. End-users verify the system meets their business needs before it is deployed.",
+                    "Incorrect. Maintenance occurs after the system has gone live into production."
+                ]
+            },
+            {
+                "questionText": "A hospital's electronic health records (EHR) system automatically grants data access permissions based on whether a user's job title is 'Doctor', 'Nurse', or 'Billing Clerk'. Which access control model is this?",
+                "options": [
+                    "Discretionary Access Control (DAC)",
+                    "Mandatory Access Control (MAC)",
+                    "Role-Based Access Control (RBAC)",
+                    "Attribute-Based Access Control (ABAC)"
+                ],
+                "correctOptionIndex": 2,
+                "explanations": [
+                    "Incorrect. DAC allows the owner of the data to decide who gets access. An automated system based on job titles does not use DAC.",
+                    "Incorrect. MAC uses strict security clearance levels (e.g., Top Secret, Confidential) rather than job functions.",
+                    "Correct! Role-Based Access Control (RBAC) assigns permissions based on a user's specific role or job title within the organization.",
+                    "Incorrect. ABAC uses environmental or context attributes (like time of day or user location), whereas this scenario relies strictly on job titles."
+                ]
+            },
+            {
+                "questionText": "In a Public Key Infrastructure (PKI) system, if an accountant wants to send an encrypted financial report to an external auditor, which key should the accountant use to encrypt the document to ensure only the auditor can read it?",
+                "options": [
+                    "The accountant's public key",
+                    "The accountant's private key",
+                    "The auditor's public key",
+                    "The auditor's private key"
+                ],
+                "correctOptionIndex": 2,
+                "explanations": [
+                    "Incorrect. Encrypting with the accountant's public key would mean only the accountant could decrypt it with their private key.",
+                    "Incorrect. Encrypting with a private key is used to create a digital signature to prove identity, not to encrypt data for confidentiality.",
+                    "Correct! In asymmetric encryption, the sender encrypts the message using the recipient's public key. Then, only the recipient has the private key needed to decrypt it.",
+                    "Incorrect. The accountant would never have access to the auditor's private key; private keys must remain completely secret."
+                ]
+            },
+            {
+                "questionText": "According to standard incident response frameworks (like NIST), what is the immediate next step after a cybersecurity breach has been successfully contained?",
+                "options": [
+                    "Preparation",
+                    "Eradication",
+                    "Recovery",
+                    "Post-Incident Activity"
+                ],
+                "correctOptionIndex": 1,
+                "explanations": [
+                    "Incorrect. Preparation is the very first phase, occurring before an incident ever happens.",
+                    "Correct! Once an incident is contained (stopping the spread), the next step is Eradication (removing the malware/threat from the network).",
+                    "Incorrect. Recovery comes after Eradication. You cannot safely restore systems (Recovery) until the threat is completely removed.",
+                    "Incorrect. Post-Incident Activity (Lessons Learned) is the final step after systems are fully recovered."
+                ]
+            },
+            {
+                "questionText": "Which of the following network security devices is specifically designed to monitor traffic for suspicious activity and alert administrators, but does NOT actively block the traffic?",
+                "options": [
+                    "Firewall",
+                    "Intrusion Detection System (IDS)",
+                    "Intrusion Prevention System (IPS)",
+                    "Virtual Private Network (VPN)"
+                ],
+                "correctOptionIndex": 1,
+                "explanations": [
+                    "Incorrect. A firewall actively blocks or allows traffic based on a predefined set of security rules.",
+                    "Correct! An Intrusion Detection System (IDS) is passive. It monitors traffic and sends alerts for suspicious behavior but does not block the traffic.",
+                    "Incorrect. An Intrusion Prevention System (IPS) is active; it both monitors traffic and actively blocks threats when detected.",
+                    "Incorrect. A VPN creates an encrypted tunnel for secure communication; it is not a monitoring or alerting device."
+                ]
+            },
+            {
+                "questionText": "A payroll processing service organization is asked by a client to provide a report covering the operational effectiveness of its security and processing integrity controls over the past 12 months. The report contains sensitive technical details and must be restricted to management and user auditors. Which report is required?",
+                "options": [
+                    "SOC 1 Type 2",
+                    "SOC 2 Type 2",
+                    "SOC 3",
+                    "SOC for Cybersecurity"
+                ],
+                "correctOptionIndex": 1,
+                "explanations": [
+                    "Incorrect. SOC 1 reports focus on Internal Controls over Financial Reporting (ICFR), not broadly on security and processing integrity.",
+                    "Correct! A SOC 2 Type 2 covers Trust Services Criteria (security, processing integrity) over a period of time and is restricted use due to the sensitive control details included.",
+                    "Incorrect. While SOC 3 covers Trust Services Criteria, it is a general-use report that does not contain sensitive technical details or a description of the auditor's testing.",
+                    "Incorrect. SOC for Cybersecurity is an entity-wide report, not specific to a service organization's system provided to user entities."
+                ]
+            },
+            {
+                "questionText": "Within a SOC 2 engagement, the service organization implements strict data encryption and redaction policies to ensure that client trade secrets are protected from unauthorized disclosure. This primarily addresses which Trust Services Criteria?",
+                "options": [
+                    "Security",
+                    "Availability",
+                    "Processing Integrity",
+                    "Confidentiality"
+                ],
+                "correctOptionIndex": 3,
+                "explanations": [
+                    "Incorrect. While Security (the common criteria) encompasses protection against unauthorized access generally, protecting specific sensitive data like trade secrets aligns more directly with Confidentiality.",
+                    "Incorrect. Availability ensures the system is operational and usable, not that data is kept secret.",
+                    "Incorrect. Processing Integrity ensures data is processed completely, accurately, and on time, which is unrelated to redaction or trade secrets.",
+                    "Correct! Confidentiality specifically addresses the protection of information designated as restricted or sensitive, such as intellectual property or trade secrets, from unauthorized disclosure."
+                ]
+            }
+        ];
+
+        // --- State Variables ---
+        let currentQuestionIndex = 0;
+        let score = parseInt(localStorage.getItem('iscQuestScore')) || 0;
+        let streak = parseInt(localStorage.getItem('iscQuestStreak')) || 0;
+        let activeQuestions = [];
+
+        // --- DOM Elements ---
+        const rankIcon = document.getElementById('rank-icon');
+        const rankTitle = document.getElementById('rank-title');
+        const scoreValue = document.getElementById('score-value');
+        const streakValue = document.getElementById('streak-value');
+        const questProgress = document.getElementById('quest-progress');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackBox = document.getElementById('feedback-box');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+        const nextBtn = document.getElementById('next-btn');
+
+        // --- Initialization Spell ---
+        function startQuest() {
+            updateStreak();
+            updateRankAndScore();
+            
+            // Shuffle the questions!
+            activeQuestions = [...rawQuestionsData].sort(() => Math.random() - 0.5); 
+            questProgress.max = activeQuestions.length;
+            renderQuestion();
+        }
+
+        // --- Tracking the Dragon Fire ---
+        function updateStreak() {
+            const today = new Date().toDateString();
+            const lastPlayed = localStorage.getItem('iscLastPlayed');
+
+            if (lastPlayed) {
+                const lastDate = new Date(lastPlayed);
+                const currentDate = new Date(today);
+                const diffTime = Math.abs(currentDate - lastDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+
+                if (diffDays === 1) streak++;
+                else if (diffDays > 1) streak = 1; 
+            } else {
+                streak = 1;
+            }
+
+            localStorage.setItem('iscLastPlayed', today);
+            localStorage.setItem('iscQuestStreak', streak);
+            streakValue.innerText = streak;
+        }
+
+        // --- The Leveling System ---
+        function updateRankAndScore() {
+            scoreValue.innerText = score;
+            localStorage.setItem('iscQuestScore', score);
+
+            if (score < 50) {
+                rankIcon.innerText = "🧑‍🎓"; rankTitle.innerText = "Peasant Bookkeeper";
+            } else if (score < 150) {
+                rankIcon.innerText = "🧙‍♂️"; rankTitle.innerText = "Apprentice of the Ledger";
+            } else if (score < 300) {
+                rankIcon.innerText = "🛡️"; rankTitle.innerText = "Knight of Compliance";
+            } else if (score < 500) {
+                rankIcon.innerText = "🦅"; rankTitle.innerText = "Lord of the SOC Reports";
+            } else {
+                rankIcon.innerText = "🐉✨"; rankTitle.innerText = "Grand Audit Wizard";
+            }
+        }
+
+        // --- Render the Challenge ---
+        function renderQuestion() {
+            feedbackBox.classList.add('hidden');
+            optionsContainer.innerHTML = ''; 
+            questProgress.value = currentQuestionIndex;
+
+            const currentQ = activeQuestions[currentQuestionIndex];
+            questionText.innerText = `Q${currentQuestionIndex + 1}: ${currentQ.questionText}`;
+
+            currentQ.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.innerText = option;
+                btn.onclick = () => checkAnswer(index, btn, currentQ);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        // --- Evaluate the Spell ---
+        function checkAnswer(selectedIndex, clickedButton, currentQ) {
+            const allButtons = optionsContainer.querySelectorAll('button');
+            allButtons.forEach(btn => btn.disabled = true);
+
+            if (selectedIndex === currentQ.correctOptionIndex) {
+                clickedButton.classList.add('correct-glow');
+                feedbackTitle.innerText = "Correct! ✨🧚‍♂️";
+                feedbackTitle.style.color = "green";
+                
+                score += 10;
+                updateRankAndScore();
+
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#f9a826', '#ccffcc', '#ffffff'] 
+                });
+            } else {
+                clickedButton.classList.add('shake-error');
+                feedbackTitle.innerText = "Incorrect! 👺⚡";
+                feedbackTitle.style.color = "red";
+                allButtons[currentQ.correctOptionIndex].classList.add('correct-glow');
+            }
+
+            feedbackExplanation.innerText = currentQ.explanations[selectedIndex];
+            feedbackBox.classList.remove('hidden');
+        }
+
+        // --- Move to Next Challenge ---
+        nextBtn.onclick = () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < activeQuestions.length) {
+                renderQuestion();
+            } else {
+                questProgress.value = activeQuestions.length;
+                questionText.innerText = "🎉 Quest Complete! The scroll has been mastered.";
+                optionsContainer.innerHTML = '';
+                feedbackBox.classList.add('hidden');
+                
+                const duration = 3 * 1000;
+                const end = Date.now() + duration;
+                (function frame() {
+                    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#f9a826'] });
+                    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#f9a826'] });
+                    if (Date.now() < end) requestAnimationFrame(frame);
+                }());
+            }
+        };
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', startQuest);
+    </script>
 </body>
 </html>
